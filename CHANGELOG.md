@@ -1,4 +1,11 @@
 # Changelog
+## [1.2.0](https://gitea.gnomatix.com/GNOMATIX/npm-packages/compare/v1.1.0...v1.2.0) (2026-01-24)
+
+
+### Features
+
+* implement environment-specific agent roles (win11, linux, macos) ([f6f028e](https://gitea.gnomatix.com/GNOMATIX/npm-packages/commit/f6f028e2e91393d6c8df7836b7b4b87006db028c))
+
 ## 1.1.0 (2026-01-24)
 
 
