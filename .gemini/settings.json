@@ -1,0 +1,36 @@
+{
+  "general": {
+    "previewFeatures": true,
+    "vimMode": true,
+    "sessionRetention": {
+      "enabled": false
+    },
+    "enablePromptCompletion": true
+  },
+  "ui": {
+    "showStatusInTitle": true,
+    "dynamicWindowTitle": true,
+    "footer": {
+      "hideContextPercentage": false
+    },
+    "showMemoryUsage": true,
+    "showCitations": true,
+    "showModelInfoInChat": true,
+    "useAlternateBuffer": true
+  },
+  "tools": {
+    "shell": {
+      "showColor": true
+    },
+    "enableToolOutputTruncation": false,
+    "disableLLMCorrection": true
+  },
+  "security": {
+    "environmentVariableRedaction": {
+      "enabled": true
+    }
+  },
+  "experimental": {
+    "skills": true
+  }
+}
