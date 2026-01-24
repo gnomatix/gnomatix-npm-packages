@@ -8,8 +8,8 @@ const path = require('path');
 
 const bundles = {
   'role-default-agent': {
-    rules: ['core-behavior'],
-    skills: ['essential-tools'],
+    rules: ['core-behavior', 'powershell-conventions'],
+    skills: ['essential-tools', 'powershell-expert'],
     workflows: ['standard-operation']
   }
 };
