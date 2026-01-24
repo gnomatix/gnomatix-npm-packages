@@ -1,0 +1,5 @@
+[env]
+MISE_ENV = "macos"
+
+[alias.node]
+# macOS-specific aliases could go here
