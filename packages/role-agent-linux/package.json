@@ -1,0 +1,10 @@
+{
+  "name": "@gnomatix/role-agent-linux",
+  "version": "1.1.0",
+  "description": "Gnomatix agent role for linux environment.",
+  "publishConfig": {
+    "registry": "https://gitea.gnomatix.com/api/packages/GNOMATIX/npm/"
+  },
+  "author": "Brett Whitty <brett@gnomatix.com>",
+  "license": "ISC"
+}
