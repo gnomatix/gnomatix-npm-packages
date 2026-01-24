@@ -1,0 +1,10 @@
+{
+  "name": "@gnomatix/role-default-agent",
+  "version": "1.0.0",
+  "description": "The baseline Gnomatix agent role, including core behavior, essential skills, and standard workflows.",
+  "publishConfig": {
+    "@gnomatix:registry": "https://gitea.gnomatix.com/api/packages/gnomatix/npm/"
+  },
+  "author": "Brett Whitty <brett@gnomatix.com>",
+  "license": "ISC"
+}

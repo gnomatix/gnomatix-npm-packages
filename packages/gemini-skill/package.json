@@ -1,0 +1,11 @@
+{
+  "name": "@gnomatix/gemini-skill",
+  "version": "1.0.0",
+  "description": "Bundle of GNOMATIX Gemini CLI agent skills",
+  "keywords": [
+    "gemini",
+    "skills"
+  ],
+  "author": "Brett Whitty <brett@gnomatix.com>",
+  "license": "ISC"
+}

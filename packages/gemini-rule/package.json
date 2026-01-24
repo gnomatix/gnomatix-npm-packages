@@ -1,0 +1,11 @@
+{
+  "name": "@gnomatix/gemini-rule",
+  "version": "1.0.0",
+  "description": "Bundle of GNOMATIX Gemini CLI instructional rules",
+  "keywords": [
+    "gemini",
+    "rules"
+  ],
+  "author": "Brett Whitty <brett@gnomatix.com>",
+  "license": "ISC"
+}
