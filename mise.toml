@@ -4,3 +4,11 @@ node = "20"
 [env]
 # This file is the baseline. 
 # Use 'mise env --env win11' etc. to load specific overrides.
+
+[tasks.build]
+description = "Assemble bundles for the current MISE_ENV"
+run = "node scripts/build-bundles.js"
+
+[tasks.publish]
+description = "Build and publish bundles for the current MISE_ENV"
+run = "npm run build && npm publish --workspaces"

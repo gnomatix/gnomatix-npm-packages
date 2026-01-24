@@ -1,0 +1,7 @@
+{
+  "name": "@gnomatix/role-agent-default",
+  "description": "Baseline agent role template",
+  "rules": ["core-behavior"],
+  "skills": ["essential-tools"],
+  "workflows": ["standard-operation"]
+}
