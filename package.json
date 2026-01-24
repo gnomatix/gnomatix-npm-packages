@@ -1,5 +1,5 @@
 {
-  "name": "gnomatix-npm-packages",
+  "name": "npm-packages",
   "version": "1.0.0",
   "private": true,
   "description": "GNOMATIX NPM package registry development environment",
@@ -16,10 +16,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://gitea.gnomatix.com/gnomatix/gnomatix-npm-packages"
+    "url": "https://gitea.gnomatix.com/GNOMATIX/npm-packages"
   },
   "publishConfig": {
-    "registry": "https://gitea.gnomatix.com/api/packages/gnomatix/npm/"
+    "registry": "https://gitea.gnomatix.com/api/packages/GNOMATIX/npm/"
   },
   "license": "ISC",
   "author": "Brett Whitty <brett@gnomatix.com>",
