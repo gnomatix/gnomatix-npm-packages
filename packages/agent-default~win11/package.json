@@ -1,0 +1,10 @@
+{
+  "name": "@gnomatix/agent-default~win11",
+  "version": "1.2.0",
+  "description": "Baseline agent role template (Environment: win11)",
+  "publishConfig": {
+    "registry": "https://gitea.gnomatix.com/api/packages/GNOMATIX/npm/"
+  },
+  "author": "Brett Whitty <brett@gnomatix.com>",
+  "license": "ISC"
+}

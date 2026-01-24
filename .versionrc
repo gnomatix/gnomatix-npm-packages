@@ -12,20 +12,12 @@
   ],
   "packageFiles": [
     "package.json",
-    "packages/gemini-rule/package.json",
-    "packages/gemini-skill/package.json",
-    "packages/gemini-workflow/package.json",
-    "packages/role-agent-win11/package.json",
-    "packages/role-agent-linux/package.json",
-    "packages/role-agent-macos/package.json"
+    "src/roles/*/package.json",
+    "packages/*/package.json"
   ],
   "bumpFiles": [
     "package.json",
-    "packages/gemini-rule/package.json",
-    "packages/gemini-skill/package.json",
-    "packages/gemini-workflow/package.json",
-    "packages/role-agent-win11/package.json",
-    "packages/role-agent-linux/package.json",
-    "packages/role-agent-macos/package.json"
+    "src/roles/*/package.json",
+    "packages/*/package.json"
   ]
 }
