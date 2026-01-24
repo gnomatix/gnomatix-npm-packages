@@ -1,6 +1,6 @@
 {
   "name": "@gnomatix/role-agent-macos",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Gnomatix agent role for macos environment.",
   "publishConfig": {
     "registry": "https://gitea.gnomatix.com/api/packages/GNOMATIX/npm/"
