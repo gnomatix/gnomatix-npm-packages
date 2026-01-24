@@ -9,7 +9,6 @@ if (!env) {
 
 const rootDir = path.join(__dirname, '..');
 const rootPkg = JSON.parse(fs.readFileSync(path.join(rootDir, 'package.json'), 'utf8'));
-const version = rootPkg.version;
 
 const rolesDir = path.join(rootDir, 'src', 'roles');
 const pkgDir = path.join(rootDir, 'packages');
@@ -24,6 +23,7 @@ roles.forEach(roleName => {
   if (!fs.existsSync(baseJsonPath)) return;
 
   const baseConfig = JSON.parse(fs.readFileSync(baseJsonPath, 'utf8'));
+  const roleVersion = baseConfig.version || '1.0.0';
   const envConfig = fs.existsSync(envJsonPath) ? JSON.parse(fs.readFileSync(envJsonPath, 'utf8')) : {};
 
   // Merge configurations
@@ -39,7 +39,7 @@ roles.forEach(roleName => {
   // Generate package.json for the bundle
   const finalPkgJson = {
     name: `@gnomatix/${bundleName}`,
-    version: version,
+    version: roleVersion,
     description: baseConfig.description + ` (Environment: ${env})`,
     publishConfig: {
       registry: "https://gitea.gnomatix.com/api/packages/GNOMATIX/npm/"
