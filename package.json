@@ -1,0 +1,24 @@
+{
+  "name": "gnomatix-npm-packages",
+  "version": "1.0.0",
+  "description": "GNOMATIX NPM package registry development environment",
+  "keywords": [
+    "npm",
+    "gemini",
+    "rules",
+    "skills",
+    "workflows",
+    "packages"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://gitea.gnomatix.com/gnomatix/gnomatix-npm-packages"
+  },
+  "license": "ISC",
+  "author": "Brett Whitty <brett@gnomatix.com>",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "/bin/true"
+  }
+}
