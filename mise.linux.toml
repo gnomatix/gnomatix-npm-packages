@@ -1,0 +1,5 @@
+[env]
+MISE_ENV = "linux"
+
+[alias.node]
+# Linux-specific aliases could go here

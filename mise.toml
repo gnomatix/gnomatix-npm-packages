@@ -1,0 +1,6 @@
+[tools]
+node = "20"
+
+[env]
+# This file is the baseline. 
+# Use 'mise env --env win11' etc. to load specific overrides.
