@@ -9,5 +9,13 @@
     "@gnomatix/rule-posix-conventions": "1.3.1",
     "@gnomatix/rule-powershell-conventions": "1.3.1",
     "@gnomatix/skill-powershell-expert": "1.3.1"
-  }
+  },
+  "bundledDependencies": [
+    "@gnomatix/rule-core-behavior",
+    "@gnomatix/skill-essential-tools",
+    "@gnomatix/workflow-standard-operation",
+    "@gnomatix/rule-posix-conventions",
+    "@gnomatix/rule-powershell-conventions",
+    "@gnomatix/skill-powershell-expert"
+  ]
 }
