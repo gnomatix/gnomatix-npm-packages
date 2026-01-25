@@ -6,7 +6,7 @@ const rootPkg = JSON.parse(fs.readFileSync(path.join(rootDir, 'package.json'), '
 const version = rootPkg.version;
 
 const rolesDir = path.join(rootDir, 'src', 'roles');
-const pkgDir = path.join(rootDir, 'packages');
+const pkgDir = path.join(rootDir, 'build');
 
 if (!fs.existsSync(pkgDir)) fs.mkdirSync(pkgDir);
 
