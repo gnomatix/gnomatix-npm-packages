@@ -1,0 +1,10 @@
+{
+  "name": "@gnomatix/rule-core-behavior",
+  "version": "1.0.0",
+  "description": "GNOMATIX rule: core-behavior",
+  "publishConfig": {
+    "registry": "https://gitea.gnomatix.com/api/packages/GNOMATIX/npm/"
+  },
+  "author": "Brett Whitty <brett@gnomatix.com>",
+  "license": "ISC"
+}

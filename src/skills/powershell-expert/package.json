@@ -1,0 +1,10 @@
+{
+  "name": "@gnomatix/skill-powershell-expert",
+  "version": "1.0.0",
+  "description": "GNOMATIX skill: powershell-expert",
+  "publishConfig": {
+    "registry": "https://gitea.gnomatix.com/api/packages/GNOMATIX/npm/"
+  },
+  "author": "Brett Whitty <brett@gnomatix.com>",
+  "license": "ISC"
+}

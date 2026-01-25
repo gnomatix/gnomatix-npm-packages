@@ -1,0 +1,10 @@
+{
+  "name": "@gnomatix/workflow-daily-report",
+  "version": "1.0.0",
+  "description": "GNOMATIX workflow: daily-report",
+  "publishConfig": {
+    "registry": "https://gitea.gnomatix.com/api/packages/GNOMATIX/npm/"
+  },
+  "author": "Brett Whitty <brett@gnomatix.com>",
+  "license": "ISC"
+}

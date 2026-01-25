@@ -1,3 +1,5 @@
 {
-  "rules": ["posix-conventions"]
+  "dependencies": {
+    "@gnomatix/rule-posix-conventions": "*"
+  }
 }
