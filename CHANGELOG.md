@@ -1,4 +1,15 @@
 # Changelog
+### [1.3.2](https://gitea.gnomatix.com/GNOMATIX/npm-packages/compare/v1.3.1...v1.3.2) (2026-01-25)
+
+
+### Maintenance
+
+* correct categorized bundling and unify versioning across all packages ([b7a8986](https://gitea.gnomatix.com/GNOMATIX/npm-packages/commit/b7a8986580d4906ca5964e7755e540e43aad8692))
+* finalize rename of packages to build and update all configs ([e480d56](https://gitea.gnomatix.com/GNOMATIX/npm-packages/commit/e480d5615ff924db6dddfab5955e34a839ddd17c))
+* implement bundledDependencies for self-contained meta-packages ([ba1345c](https://gitea.gnomatix.com/GNOMATIX/npm-packages/commit/ba1345c78d9c4af463ac44c560d44bed6478677e))
+* remove example bundle and finalize workspace configuration ([f61c2b6](https://gitea.gnomatix.com/GNOMATIX/npm-packages/commit/f61c2b649042f8a65c790c9c0f96992bb04bc856))
+* rename packages directory to build to separate artifacts from sources ([3b7c4ed](https://gitea.gnomatix.com/GNOMATIX/npm-packages/commit/3b7c4edb307fc9643dc91666795ad155eb360603))
+
 ### [1.3.1](https://gitea.gnomatix.com/GNOMATIX/npm-packages/compare/v1.3.0...v1.3.1) (2026-01-25)
 
 ## [1.3.0](https://gitea.gnomatix.com/GNOMATIX/npm-packages/compare/v1.2.0...v1.3.0) (2026-01-25)
