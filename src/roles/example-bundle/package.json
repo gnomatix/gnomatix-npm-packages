@@ -1,5 +1,0 @@
-{
-    "name": "bundle-dependencies",
-    "version": "0.0.0",
-    "bundledDependencies": ["@gnomatix/gemini-workflow"]
-}
