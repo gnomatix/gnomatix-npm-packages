@@ -11,34 +11,23 @@ run = "Remove-Item -Path packages/* -Recurse -Force"
 shell = "powershell"
 
 [tasks.build]
-description = "Assemble bundles for the current MISE_ENV"
+description = "Assemble universal meta-package bundles"
 depends = ["clean"]
-env = { BUILD_MODE = "local" }
-run = "node scripts/build-bundles.js"
-
-[tasks."build:dev"]
-description = "Assemble development bundles with commit hash suffix"
-env = { BUILD_MODE = "dev" }
-run = "node scripts/build-bundles.js"
-
-[tasks."build:branch"]
-description = "Assemble branch-specific bundles with branch name suffix"
-env = { BUILD_MODE = "branch" }
 run = "node scripts/build-bundles.js"
 
 [tasks."publish:components"]
-description = "Publish all atomic rules, skills, and workflows"
+description = "Publish all atomic rules, skills, and workflows at current version"
 run = "npm publish --workspaces --if-present --registry https://gitea.gnomatix.com/api/packages/GNOMATIX/npm/"
 
 [tasks."publish:bundles"]
-description = "Publish environment-specific bundles"
-run = "npm publish packages/agent-default~${MISE_ENV} --registry https://gitea.gnomatix.com/api/packages/GNOMATIX/npm/"
+description = "Publish universal meta-packages"
+run = "npm publish packages/* --registry https://gitea.gnomatix.com/api/packages/GNOMATIX/npm/"
 
 [tasks.release]
-description = "Professional Release Flow: Version -> Publish Sources -> Build Meta-Packages -> Publish Bundles"
+description = "Full release: Version -> Publish Components -> Build Meta-Packages -> Publish Bundles"
 run = [
   "npm run release",
   "mise run publish:components",
-  "mise run build --env ${MISE_ENV} --mode release",
+  "mise run build",
   "mise run publish:bundles"
 ]
