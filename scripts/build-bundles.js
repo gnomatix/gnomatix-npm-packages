@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const { execSync } = require('child_process');
 
 const rootDir = path.join(__dirname, '..');
 const rootPkg = JSON.parse(fs.readFileSync(path.join(rootDir, 'package.json'), 'utf8'));
@@ -20,18 +21,22 @@ roles.forEach(roleName => {
 
   // Copy files from src to build package
   fs.readdirSync(source).forEach(file => {
-    // We only care about config files (json and toml)
     if (file.endsWith('.json') || file.endsWith('.toml')) {
       let content = fs.readFileSync(path.join(source, file), 'utf8');
       
-      // Ensure the version matches the root project
       if (file === 'package.json') {
         const pkg = JSON.parse(content);
         pkg.version = version;
-        // Synchronize all dependencies to this version as well
-        Object.keys(pkg.dependencies || {}).forEach(dep => {
-          pkg.dependencies[dep] = version;
+        
+        // Ensure all dependencies match project version
+        const deps = pkg.dependencies || {};
+        Object.keys(deps).forEach(dep => {
+          deps[dep] = version;
         });
+        
+        // IMPLEMENTATION: Add all dependencies to bundledDependencies
+        pkg.bundledDependencies = Object.keys(deps);
+        
         content = JSON.stringify(pkg, null, 2);
       }
 
@@ -39,5 +44,18 @@ roles.forEach(roleName => {
     }
   });
 
-  console.log(`Bundle ${roleName}@${version} assembled.`);
+  console.log(`Bundle ${roleName}@${version} prepared with bundledDependencies.`);
+
+  // To support bundledDependencies, we must perform a local install in the build dir
+  // This ensures the dependencies are present in build/*/node_modules before publication.
+  console.log(`  Performing local install for bundling...`);
+  try {
+    execSync(`npm install --no-package-lock --registry https://gitea.gnomatix.com/api/packages/GNOMATIX/npm/`, {
+      cwd: target,
+      stdio: 'inherit'
+    });
+    console.log(`  + Dependencies bundled successfully.`);
+  } catch (e) {
+    console.warn(`  ! Bundling install failed. This may be normal if components aren't published yet.`);
+  }
 });
