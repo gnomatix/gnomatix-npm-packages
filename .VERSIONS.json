@@ -1,0 +1,52 @@
+{
+  "@gnomatix/role-agent-default": {
+    "git_hash": "df34cee37913b458a5e42865b0736b84306fdd14",
+    "path": "src/roles/agent-default",
+    "version": "$BUILD_VERSION"
+  },
+  "@gnomatix/workflow-daily-report": {
+    "git_hash": "3e551af7487e9a0f39285efe2bef3f15fd6ab83c",
+    "path": "src/workflows/daily-report",
+    "version": "$BUILD_VERSION"
+  },
+  "@gnomatix/rule-core-behavior": {
+    "git_hash": "599035319831d6386b645c83e8d04e008305c0ea",
+    "path": "src/rules/core-behavior",
+    "version": "$BUILD_VERSION"
+  },
+  "@gnomatix/skill-essential-tools": {
+    "git_hash": "09c011ba0cce2f78f5d081ea1f7c70db6fe80db7",
+    "path": "src/skills/essential-tools",
+    "version": "$BUILD_VERSION"
+  },
+  "@gnomatix/rule-git": {
+    "git_hash": "e56d3ca12f118d6a3a36042490038d6e3f6af965",
+    "path": "src/rules/git",
+    "version": "$BUILD_VERSION"
+  },
+  "@gnomatix/skill-powershell-expert": {
+    "git_hash": "4fee4ebc38ab758dbbce9e0417cc447db03124eb",
+    "path": "src/skills/powershell-expert",
+    "version": "$BUILD_VERSION"
+  },
+  "@gnomatix/workflow-standard-operation": {
+    "git_hash": "9773cf53926b7c09a30273f7171aad56edf19fb1",
+    "path": "src/workflows/standard-operation",
+    "version": "$BUILD_VERSION"
+  },
+  "@gnomatix/skill-jira-triage": {
+    "git_hash": "8d34e9a74bd4b89581f11d4059d43e44432e9ca2",
+    "path": "src/skills/jira-triage",
+    "version": "$BUILD_VERSION"
+  },
+  "@gnomatix/rule-powershell-conventions": {
+    "git_hash": "a47fd16ec2d6cb4da4d269ed331980a6a13f59cf",
+    "path": "src/rules/powershell-conventions",
+    "version": "$BUILD_VERSION"
+  },
+  "@gnomatix/rule-posix-conventions": {
+    "git_hash": "9dbbee903e3d8bdc416821c7665f645e294f4b68",
+    "path": "src/rules/posix-conventions",
+    "version": "$BUILD_VERSION"
+  }
+}

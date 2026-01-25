@@ -1,6 +1,6 @@
 {
   "name": "@gnomatix/skill-powershell-expert",
-  "version": "$BUILD_VERSION",
+  "version": "1.3.1",
   "description": "GNOMATIX skill: powershell-expert",
   "publishConfig": {
     "registry": "https://gitea.gnomatix.com/api/packages/GNOMATIX/npm/"

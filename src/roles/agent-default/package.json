@@ -1,13 +1,13 @@
 {
   "name": "@gnomatix/role-agent-default",
-  "version": "$BUILD_VERSION",
+  "version": "1.3.1",
   "description": "Universal Gnomatix agent role",
   "dependencies": {
-    "@gnomatix/rule-core-behavior": "$BUILD_VERSION",
-    "@gnomatix/skill-essential-tools": "$BUILD_VERSION",
-    "@gnomatix/workflow-standard-operation": "$BUILD_VERSION",
-    "@gnomatix/rule-posix-conventions": "$BUILD_VERSION",
-    "@gnomatix/rule-powershell-conventions": "$BUILD_VERSION",
-    "@gnomatix/skill-powershell-expert": "$BUILD_VERSION"
+    "@gnomatix/rule-core-behavior": "latest",
+    "@gnomatix/skill-essential-tools": "latest",
+    "@gnomatix/workflow-standard-operation": "latest",
+    "@gnomatix/rule-posix-conventions": "latest",
+    "@gnomatix/rule-powershell-conventions": "latest",
+    "@gnomatix/skill-powershell-expert": "latest"
   }
 }
