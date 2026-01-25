@@ -4,6 +4,7 @@ description: Expert-level PowerShell assistance for system administration and de
 ---
 
 # Instructions
+
 1. **Discovery**: Use `Get-Command` to verify tool availability.
 2. **Environment**: Manage environment variables using the `$env:` provider.
 3. **Registry**: Use the `HKLM:` and `HKCU:` drives for registry operations if permitted.

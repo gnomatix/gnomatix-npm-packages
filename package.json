@@ -29,7 +29,8 @@
   "author": "Brett Whitty <brett@gnomatix.com>",
   "scripts": {
     "build": "node scripts/build-bundles.js",
-    "test": "node tests/validate.js",
+    "test": "npm run lint && node tests/validate.js",
+    "lint": "npx markdownlint-cli src/**/*.md --config .markdownlint.json",
     "release": "standard-version",
     "postrelease": "npm run publish-all",
     "publish-all": "npm run build && npm publish --workspaces",
