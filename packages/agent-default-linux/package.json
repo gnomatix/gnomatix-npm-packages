@@ -1,7 +1,7 @@
 {
   "name": "@gnomatix/role-agent-default",
-  "version": "1.2.0-linux.dev.21595f9",
-  "description": "Baseline agent role template (Target: linux)",
+  "version": "1.2.0-linux.dev.65ee878",
+  "description": "Baseline agent role template (Target Environment: linux)",
   "publishConfig": {
     "registry": "https://gitea.gnomatix.com/api/packages/GNOMATIX/npm/"
   },
