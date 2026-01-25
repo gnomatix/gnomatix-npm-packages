@@ -1,10 +1,18 @@
 {
-  "name": "@gnomatix/workflow-standard-operation",
-  "version": "1.0.0",
-  "description": "GNOMATIX workflow: standard-operation",
-  "publishConfig": {
-    "registry": "https://gitea.gnomatix.com/api/packages/GNOMATIX/npm/"
-  },
-  "author": "Brett Whitty <brett@gnomatix.com>",
-  "license": "ISC"
+    "name":  "@gnomatix/workflow-standard-operation",
+    "version":  "1.0.0",
+    "description":  "GNOMATIX workflow: standard-operation",
+    "publishConfig":  {
+                          "registry":  "https://gitea.gnomatix.com/api/packages/GNOMATIX/npm/"
+                      },
+    "author":  "Brett Whitty \u003cbrett@gnomatix.com\u003e",
+    "license":  "ISC",
+    "os":  [
+               "win32",
+               "darwin",
+               "linux"
+           ],
+    "arch":  [
+                 "x64"
+             ]
 }
