@@ -14,8 +14,9 @@ Everything in this ecosystem is a versioned **npm package** hosted on the [Gnoma
 Global and environment-specific configurations are located in the [`.config/mise/`](./.config/mise/) directory.
 
 ### 1. Atomic Sources (`src/`)
-- **Independent Versioning**: Rules, skills, and workflows are versioned independently of the repository infrastructure. See [Versioning Policy](./docs/VERSIONING.md) for details.
+- **Independent Versioning**: Rules, skills, and workflows are versioned independently of the repository infrastructure. See [Developer Notes](./docs/developer/README.md) for details.
 - **Rules**: Core behavioral constraints (`src/rules/`).
+
 - **Skills**: Specialized agent capabilities and tools (`src/skills/`).
 - **Workflows**: Procedural multi-step engineering guides (`src/workflows/`).
 - Each source is a standalone package with `os` and `arch` metadata.

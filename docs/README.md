@@ -1,8 +1,9 @@
 # GNOMATIX Documentation
 
-This directory contains the architectural specifications, policies, and guides for the GNOMATIX NPM Packages repository.
+Welcome to the documentation for GNOMATIX NPM Packages.
 
-## Table of Contents
+## 🛠️ [Developer Notes](./developer/README.md)
+Architecture, versioning policies, and guides for contributing new rules and skills.
 
-- [Versioning Policy](./VERSIONING.md) - Detailed guide on independent versioning and checksum-based releases.
-- [Architecture Overview](../README.md#🏗️-architecture) - High-level system structure.
+## 📖 [User Documentation](./user/README.md)
+Installation and usage guides for consuming roles via `mise`.
