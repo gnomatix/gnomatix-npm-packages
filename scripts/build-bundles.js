@@ -2,14 +2,18 @@ const fs = require('fs');
 const path = require('path');
 
 const rootDir = path.join(__dirname, '..');
-const rolesDir = path.join(rootDir, 'src', 'roles');
+const buildVersion = process.env.BUILD_VERSION;
+
+if (!buildVersion) {
+  console.error('BUILD_VERSION not set. Ensure mise is correctly configured.');
+  process.exit(1);
+}
+
+const srcDir = path.join(rootDir, 'src');
 const buildDir = path.join(rootDir, 'build');
 
 if (!fs.existsSync(buildDir)) fs.mkdirSync(buildDir);
 
-/**
- * Recursively find all directories containing a package.json in src/
- */
 function findPackages(dir, list = []) {
   const files = fs.readdirSync(dir);
   if (files.includes('package.json')) {
@@ -25,7 +29,7 @@ function findPackages(dir, list = []) {
   return list;
 }
 
-const packages = findPackages(srcDir = path.join(rootDir, 'src'));
+const packages = findPackages(srcDir);
 
 packages.forEach(pkgSourcePath => {
   const pkgJson = JSON.parse(fs.readFileSync(path.join(pkgSourcePath, 'package.json'), 'utf8'));
@@ -34,7 +38,6 @@ packages.forEach(pkgSourcePath => {
 
   if (!fs.existsSync(targetPath)) fs.mkdirSync(targetPath, { recursive: true });
 
-  // Copy all files from source to build
   fs.readdirSync(pkgSourcePath).forEach(file => {
     if (file === 'node_modules') return;
     
@@ -44,11 +47,14 @@ packages.forEach(pkgSourcePath => {
     if (fs.statSync(srcFile).isDirectory()) {
       fs.cpSync(srcFile, destFile, { recursive: true });
     } else {
-      // For the build output, we just copy the files as they are defined in src/
-      // The versioning is already handled in the source package.json files.
-      fs.copyFileSync(srcFile, destFile);
+      let content = fs.readFileSync(srcFile, 'utf8');
+      
+      // IMPLEMENTATION: Expand all $BUILD_VERSION placeholders
+      content = content.split('$BUILD_VERSION').join(buildVersion);
+      
+      fs.writeFileSync(destFile, content);
     }
   });
 
-  console.log(`Staged ${pkgJson.name}@${pkgJson.version} in build/${pkgName}`);
+  console.log(`Staged ${pkgJson.name}@${buildVersion} in build/${pkgName}`);
 });
