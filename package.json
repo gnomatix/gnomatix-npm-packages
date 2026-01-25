@@ -4,6 +4,10 @@
   "private": true,
   "description": "GNOMATIX NPM package registry development environment",
   "workspaces": [
+    "src/rules/*",
+    "src/skills/*",
+    "src/workflows/*",
+    "src/roles/*",
     "packages/*"
   ],
   "keywords": [
@@ -25,7 +29,7 @@
   "author": "Brett Whitty <brett@gnomatix.com>",
   "scripts": {
     "build": "node scripts/build-bundles.js",
-    "test": "npm test --workspaces",
+    "test": "node tests/validate.js",
     "release": "standard-version",
     "postrelease": "npm run publish-all",
     "publish-all": "npm run build && npm publish --workspaces",
