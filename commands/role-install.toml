@@ -1,0 +1,2 @@
+description = "Activate a Gnomatix agent role in the current workspace using mise."
+command = "mise use gnomatix:role-{{args}}"

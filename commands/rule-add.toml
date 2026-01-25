@@ -1,0 +1,2 @@
+description = "Install a specific Gnomatix rule package using mise."
+command = "mise use gnomatix:rule-{{args}}"

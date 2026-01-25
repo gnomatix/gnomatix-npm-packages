@@ -1,0 +1,5 @@
+{
+  "name": "gnomatix-manager",
+  "version": "0.1.0",
+  "description": "Management commands for Gnomatix agent roles and rules."
+}
