@@ -6,8 +6,8 @@ node = "lts"
 # Use 'mise env --env win11' etc. to load specific overrides.
 
 [tasks.clean]
-description = "Remove all assembled bundles from packages/"
-run = "Remove-Item -Path packages/* -Recurse -Force"
+description = "Remove all assembled bundles from build/"
+run = "Remove-Item -Path build/* -Recurse -Force"
 shell = "powershell"
 
 [tasks.build]
@@ -21,7 +21,7 @@ run = "npm publish --workspaces --if-present --registry https://gitea.gnomatix.c
 
 [tasks."publish:bundles"]
 description = "Publish universal meta-packages"
-run = "npm publish packages/* --registry https://gitea.gnomatix.com/api/packages/GNOMATIX/npm/"
+run = "npm publish build/* --registry https://gitea.gnomatix.com/api/packages/GNOMATIX/npm/"
 
 [tasks.release]
 description = "Full release: Version -> Publish Components -> Build Meta-Packages -> Publish Bundles"
