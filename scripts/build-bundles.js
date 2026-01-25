@@ -15,23 +15,18 @@ const rolesDir = path.join(rootDir, 'src', 'roles');
 const pkgDir = path.join(rootDir, 'packages');
 
 let baseVersion = rootPkg.version;
-let versionSuffix = '';
+// Environment-specific version suffix (e.g., 1.2.0-win11)
+let finalVersion = `${baseVersion}-${env}`;
 
-// Determine dynamic version suffix
-try {
-  const branch = execSync('git rev-parse --abbrev-ref HEAD').toString().trim();
-  if (mode === 'dev' || branch === 'develop') {
+// Add dev suffix if not in release mode
+if (mode !== 'release') {
+  try {
     const hash = execSync('git rev-parse --short HEAD').toString().trim();
-    versionSuffix = `-dev.${hash}`;
-  } else if (mode === 'branch' && branch !== 'main' && branch !== 'develop') {
-    const cleanBranch = branch.replace(/[^a-zA-Z0-9]/g, '-');
-    versionSuffix = `-${cleanBranch}`;
+    finalVersion += `.dev.${hash}`;
+  } catch (e) {
+    finalVersion += '.dev.unknown';
   }
-} catch (e) {
-  console.warn('Git context not available, using base version.');
 }
-
-const finalVersion = baseVersion + versionSuffix;
 
 const roles = fs.readdirSync(rolesDir);
 
@@ -45,22 +40,22 @@ roles.forEach(roleName => {
   const baseConfig = JSON.parse(fs.readFileSync(baseJsonPath, 'utf8'));
   const envConfig = fs.existsSync(envJsonPath) ? JSON.parse(fs.readFileSync(envJsonPath, 'utf8')) : {};
 
-  // Merge dependencies and force the current project version
+  // Resolve dependencies to current project version
   const mergedDeps = { ...(baseConfig.dependencies || {}), ...(envConfig.dependencies || {}) };
   Object.keys(mergedDeps).forEach(dep => {
-    mergedDeps[dep] = (mode === 'local') ? '*' : finalVersion;
+    mergedDeps[dep] = (mode === 'local') ? '*' : baseVersion;
   });
 
-  const bundleName = `${roleName}~${env}`;
-  const targetPkgPath = path.join(pkgDir, bundleName);
+  // Local directory must be unique for workspaces, but published name is unified
+  const bundleDirName = `${roleName}-${env}`;
+  const targetPkgPath = path.join(pkgDir, bundleDirName);
 
   if (!fs.existsSync(targetPkgPath)) fs.mkdirSync(targetPkgPath, { recursive: true });
 
-  // Generate the Meta-Package package.json
   const finalPkgJson = {
-    name: `@gnomatix/${bundleName}`,
-    version: finalVersion,
-    description: baseConfig.description + ` [Mode: ${mode}] (Env: ${env})`,
+    name: baseConfig.name, // The clean, unified name (e.g. @gnomatix/role-agent-default)
+    version: finalVersion, // The environment-specific version (e.g. 1.2.0-win11)
+    description: baseConfig.description + ` (Target: ${env})`,
     publishConfig: {
       registry: "https://gitea.gnomatix.com/api/packages/GNOMATIX/npm/"
     },
@@ -70,21 +65,39 @@ roles.forEach(roleName => {
   };
   fs.writeFileSync(path.join(targetPkgPath, 'package.json'), JSON.stringify(finalPkgJson, null, 2));
 
-  console.log(`Meta-Package ${bundleName}@${finalVersion} generated.`);
+  // Assemble files (inlining)
+  ['rules', 'skills', 'workflows'].forEach(dir => {
+    const p = path.join(targetPkgPath, dir);
+    if (fs.existsSync(p)) fs.rmSync(p, { recursive: true, force: true });
+  });
 
-  // If in dev or branch mode, attempt to verify dependencies via npm install
-  if (mode !== 'local') {
-    console.log(`  Verifying dependencies for ${bundleName} via npm install...`);
-    try {
-      // We use --dry-run or similar to verify existence without bloating the repo
-      // Note: This requires the components to have been published first
-      execSync(`npm install --package-lock-only --registry https://gitea.gnomatix.com/api/packages/GNOMATIX/npm/`, {
-        cwd: targetPkgPath,
-        stdio: 'inherit'
+  // Map of all available atomic source packages
+  const atomicSourceMap = {};
+  ['rules', 'skills', 'workflows'].forEach(type => {
+    const typeDir = path.join(rootDir, 'src', type);
+    if (fs.existsSync(typeDir)) {
+      fs.readdirSync(typeDir).forEach(name => {
+        const p = path.join(typeDir, name, 'package.json');
+        if (fs.existsSync(p)) {
+          const pj = JSON.parse(fs.readFileSync(p, 'utf8'));
+          atomicSourceMap[pj.name] = { type, path: path.join(typeDir, name) };
+        }
       });
-      console.log(`  + Dependencies verified on registry.`);
-    } catch (e) {
-      console.warn(`  ! Dependency verification failed for ${bundleName}. Ensure components are published.`);
     }
-  }
+  });
+
+  Object.entries(mergedDeps).forEach(([pkgName, pkgVersion]) => {
+    const sourcePkg = atomicSourceMap[pkgName];
+    if (sourcePkg) {
+      const targetSubDir = path.join(targetPkgPath, sourcePkg.type);
+      if (!fs.existsSync(targetSubDir)) fs.mkdirSync(targetSubDir, { recursive: true });
+      fs.readdirSync(sourcePkg.path).forEach(file => {
+        if (file !== 'package.json' && file !== 'node_modules') {
+          fs.copyFileSync(path.join(sourcePkg.path, file), path.join(targetSubDir, file));
+        }
+      });
+    }
+  });
+
+  console.log(`Bundle ${finalPkgJson.name}@${finalVersion} assembled.`);
 });
