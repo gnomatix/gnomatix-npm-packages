@@ -9,29 +9,34 @@ function PLUGIN:BackendInstall(ctx)
     end
 
     local registry = "https://gitea.gnomatix.com/api/packages/GNOMATIX/npm/"
-    local install_path = ctx.install_path
-
-    -- Install using npm into the mise install path
-    -- We use --prefix to ensure it lands exactly in the install_path/node_modules
-    local npm_cmd = "npm install " .. package_name .. "@" .. ctx.version .. " --prefix " .. install_path .. " --registry " .. registry .. " --no-save --no-package-lock --silent"
+    
+    -- mise provides ctx.install_path as an atomic, temporary location.
+    -- We install the package here. Since it's a temp dir, we don't have to worry 
+    -- about concurrent installs or cleaning up half-finished work.
+    local npm_cmd = string.format(
+        "npm install %s@%s --prefix %q --registry %s --no-save --no-package-lock --silent",
+        package_name, ctx.version, ctx.install_path, registry
+    )
     
     local result = cmd.exec(npm_cmd)
     if result.exit_code ~= 0 then
         error("Failed to install " .. package_name .. "@" .. ctx.version .. "\n" .. result.stderr)
     end
 
-    -- Move contents to the root of the install path for easier discovery by the agent
+    -- Structure cleanup: The content is currently in ctx.install_path/node_modules/@gnomatix/pkg
+    -- We want the content at the root of the install_path.
     local base_name = package_name:gsub("^@gnomatix/", "")
-    local source = file.join(install_path, "node_modules", "@gnomatix", base_name)
+    local source = file.join(ctx.install_path, "node_modules", "@gnomatix", base_name)
     
+    -- Using native move logic which is safe inside mise's temp install_path
     if RUNTIME.osType == "windows" then
-        cmd.exec("powershell -Command \"Copy-Item -Path '" .. source .. "\\*' -Destination '" .. install_path .. "' -Recurse -Force\"")
+        cmd.exec(string.format("powershell -Command \"Move-Item -Path %q\\* -Destination %q -Force\"", source, ctx.install_path))
     else
-        cmd.exec("cp -r " .. source .. "/* " .. install_path .. "/")
+        cmd.exec(string.format("mv %s/* %s/", source, ctx.install_path))
     end
 
-    -- Cleanup node_modules
-    file.remove_all(file.join(install_path, "node_modules"))
+    -- We can safely delete node_modules here as we are inside mise's atomic temp dir
+    file.remove_all(file.join(ctx.install_path, "node_modules"))
 
     return {}
 end
