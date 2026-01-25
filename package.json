@@ -1,41 +1,41 @@
 {
-  "name": "npm-packages",
-  "version": "1.3.2",
-  "private": true,
-  "description": "GNOMATIX NPM package registry development environment",
-  "workspaces": [
-    "src/rules/*",
-    "src/skills/*",
-    "src/workflows/*",
-    "src/roles/*"
-  ],
-  "keywords": [
-    "npm",
-    "gemini",
-    "rules",
-    "skills",
-    "workflows",
-    "packages"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://gitea.gnomatix.com/GNOMATIX/npm-packages"
-  },
-  "publishConfig": {
-    "registry": "https://gitea.gnomatix.com/api/packages/GNOMATIX/npm/"
-  },
-  "license": "ISC",
-  "author": "Brett Whitty <brett@gnomatix.com>",
-  "scripts": {
-    "build": "node scripts/build-bundles.js",
-    "test": "npm run lint && node tests/validate.js",
-    "lint": "npx markdownlint-cli src/**/*.md --config .markdownlint.json",
-    "release": "standard-version",
-    "postrelease": "npm run publish-all",
-    "publish-all": "npm run build && npm publish --workspaces",
-    "publish-all:dry": "npm run build && npm publish --workspaces --dry-run"
-  },
-  "devDependencies": {
-    "standard-version": "^9.5.0"
-  }
+    "name":  "npm-packages",
+    "version":  "1.3.2",
+    "private":  true,
+    "description":  "GNOMATIX NPM package registry development environment",
+    "workspaces":  [
+                       "src/rules/*",
+                       "src/skills/*",
+                       "src/workflows/*",
+                       "src/roles/*"
+                   ],
+    "keywords":  [
+                     "npm",
+                     "gemini",
+                     "rules",
+                     "skills",
+                     "workflows",
+                     "packages"
+                 ],
+    "repository":  {
+                       "type":  "git",
+                       "url":  "https://gitea.gnomatix.com/GNOMATIX/npm-packages"
+                   },
+    "publishConfig":  {
+                          "registry":  "https://gitea.gnomatix.com/api/packages/GNOMATIX/npm/"
+                      },
+    "license": "BSL-1.1",
+    "author":  "Brett Whitty <brett@gnomatix.com>",
+    "scripts":  {
+                    "build":  "node scripts/build-bundles.js",
+                    "test":  "npm run lint \u0026\u0026 node tests/validate.js",
+                    "lint":  "npx markdownlint-cli src/**/*.md --config .markdownlint.json",
+                    "release":  "standard-version",
+                    "postrelease":  "npm run publish-all",
+                    "publish-all":  "npm run build \u0026\u0026 npm publish --workspaces",
+                    "publish-all:dry":  "npm run build \u0026\u0026 npm publish --workspaces --dry-run"
+                },
+    "devDependencies":  {
+                            "standard-version":  "^9.5.0"
+                        }
 }

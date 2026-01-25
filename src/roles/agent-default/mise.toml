@@ -1,8 +1,8 @@
 [env]
 # Default paths for discovery
-_.rules_path = "{{config.root}}/.agent/rules"
-_.skills_path = "{{config.root}}/.agent/skills"
-_.workflows_path = "{{config.root}}/.agent/workflows"
+GNOMATIX_RULES_PATH = "{{config_root}}/.agent/rules"
+GNOMATIX_SKILLS_PATH = "{{config_root}}/.agent/skills"
+GNOMATIX_WORKFLOWS_PATH = "{{config_root}}/.agent/workflows"
 
 [tasks.setup]
 description = "Automatically install and structure the agent environment"

@@ -1,0 +1,43 @@
+Business Source License 1.1
+
+Parameters
+
+Licensor: GNOMATIX
+Additional Use Grant: None
+Change Date: 2029-01-01
+Change License: Apache-2.0
+
+Terms
+
+1. A License Grant. Subject to the terms and conditions of this License, 
+   Licensor hereby grants you a non-exclusive, worldwide, royalty-free, 
+   non-transferable (except as provided in Section 4) license to use the 
+   Licensed Work for any purpose except for any Excluded Purpose.
+
+2. Excluded Purpose. You may not use the Licensed Work for any 
+   Excluded Purpose. "Excluded Purpose" means any use of the Licensed Work 
+   for a Production Environment. "Production Environment" means any 
+   environment where the Licensed Work is used for purposes other than 
+   development, testing, or quality assurance.
+
+3. Change to Open Source License. On the Change Date, or the fourth 
+   anniversary of the first public release of a specific version of the 
+   Licensed Work under this License, whichever is earlier, this License 
+   shall terminate and the Licensed Work shall be licensed under the 
+   Change License.
+
+4. Transfers. You may not transfer this License or your rights under it 
+   to any third party without Licensor's prior written consent.
+
+5. Intellectual Property. Licensor retains all right, title, and 
+   interest in and to the Licensed Work, including all intellectual 
+   property rights.
+
+6. No Warranty. THE LICENSED WORK IS PROVIDED "AS IS", WITHOUT 
+   WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
+   TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR 
+   PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR 
+   COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
+   LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, 
+   ARISING FROM, OUT OF OR IN CONNECTION WITH THE LICENSED WORK OR THE 
+   USE OR OTHER DEALINGS IN THE LICENSED WORK.

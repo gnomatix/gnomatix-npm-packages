@@ -5,8 +5,8 @@
     "publishConfig":  {
                           "registry":  "https://gitea.gnomatix.com/api/packages/GNOMATIX/npm/"
                       },
-    "author":  "Brett Whitty \u003cbrett@gnomatix.com\u003e",
-    "license":  "ISC",
+    "author":  "Brett Whitty <brett@gnomatix.com>",
+    "license": "BSL-1.1",
     "os":  [
                "win32",
                "darwin",
