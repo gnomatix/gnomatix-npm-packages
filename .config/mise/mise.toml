@@ -2,25 +2,25 @@
 node = "lts"
 
 [plugins]
-gnomatix = "./mise-plugin"
+gnomatix = "{{config_root}}/../../mise-plugin"
 
 [env]
-# This file is the baseline. 
-# Use 'mise env --env win11' etc. to load specific overrides.
+# Point to root VERSION file (two levels up from .config/mise)
+BUILD_VERSION = "{{ exec(command='cat ' ~ config_root ~ '/../../VERSION') | trim }}"
 
 [tasks.setup_plugin]
 description = "Register the local Gnomatix mise backend plugin"
-run = "mise plugin install gnomatix ./mise-plugin"
+run = "mise plugin install gnomatix {{config_root}}/../../mise-plugin"
 
 [tasks.clean]
 description = "Remove all assembled bundles from build/"
-run = "Remove-Item -Path build/* -Recurse -Force"
+run = "Remove-Item -Path {{config_root}}/../../build/* -Recurse -Force"
 shell = "powershell"
 
 [tasks.build]
 description = "Assemble universal meta-package bundles"
 depends = ["clean"]
-run = "node scripts/build-bundles.js"
+run = "node {{config_root}}/../../scripts/build-bundles.js"
 
 [tasks."publish:components"]
 description = "Publish all atomic rules, skills, and workflows at current version"
@@ -28,7 +28,7 @@ run = "npm publish --workspaces --if-present --registry https://gitea.gnomatix.c
 
 [tasks."publish:bundles"]
 description = "Publish universal meta-packages"
-run = "npm publish build/* --registry https://gitea.gnomatix.com/api/packages/GNOMATIX/npm/"
+run = "npm publish {{config_root}}/../../build/* --registry https://gitea.gnomatix.com/api/packages/GNOMATIX/npm/"
 
 [tasks.release]
 description = "Full release: Version -> Publish Components -> Build Meta-Packages -> Publish Bundles"
