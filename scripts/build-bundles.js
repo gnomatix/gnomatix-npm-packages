@@ -1,61 +1,72 @@
 const fs = require('fs');
 const path = require('path');
-const { execSync } = require('child_process');
 
 const rootDir = path.join(__dirname, '..');
 const rootPkg = JSON.parse(fs.readFileSync(path.join(rootDir, 'package.json'), 'utf8'));
 const version = rootPkg.version;
 
-const rolesDir = path.join(rootDir, 'src', 'roles');
-const pkgDir = path.join(rootDir, 'build');
+const srcDir = path.join(rootDir, 'src');
+const buildDir = path.join(rootDir, 'build');
 
-if (!fs.existsSync(pkgDir)) fs.mkdirSync(pkgDir);
+if (!fs.existsSync(buildDir)) fs.mkdirSync(buildDir);
 
-const roles = fs.readdirSync(rolesDir);
+/**
+ * Recursively find all directories containing a package.json in src/
+ */
+function findPackages(dir, list = []) {
+  const files = fs.readdirSync(dir);
+  if (files.includes('package.json')) {
+    list.push(dir);
+  } else {
+    files.forEach(file => {
+      const fullPath = path.join(dir, file);
+      if (fs.statSync(fullPath).isDirectory() && file !== 'node_modules') {
+        findPackages(fullPath, list);
+      }
+    });
+  }
+  return list;
+}
 
-roles.forEach(roleName => {
-  const source = path.join(rolesDir, roleName);
-  const target = path.join(pkgDir, roleName);
+const packages = findPackages(srcDir);
 
-  if (!fs.existsSync(target)) fs.mkdirSync(target, { recursive: true });
+packages.forEach(pkgSourcePath => {
+  const relativePath = path.relative(srcDir, pkgSourcePath);
+  // Flatten the build structure: build/package-name-only
+  const pkgJson = JSON.parse(fs.readFileSync(path.join(pkgSourcePath, 'package.json'), 'utf8'));
+  const pkgName = pkgJson.name.split('/').pop();
+  const targetPath = path.join(buildDir, pkgName);
 
-  // Copy files from src to build package
-  fs.readdirSync(source).forEach(file => {
-    if (file.endsWith('.json') || file.endsWith('.toml')) {
-      let content = fs.readFileSync(path.join(source, file), 'utf8');
+  if (!fs.existsSync(targetPath)) fs.mkdirSync(targetPath, { recursive: true });
+
+  // Copy all files from source to build
+  fs.readdirSync(pkgSourcePath).forEach(file => {
+    if (file === 'node_modules') return;
+    
+    const srcFile = path.join(pkgSourcePath, file);
+    const destFile = path.join(targetPath, file);
+
+    if (fs.statSync(srcFile).isDirectory()) {
+      // Simple recursive copy for subdirs (like rules/skills dirs in roles)
+      fs.cpSync(srcFile, destFile, { recursive: true });
+    } else {
+      let content = fs.readFileSync(srcFile, 'utf8');
       
+      // Sync version and dependencies in package.json
       if (file === 'package.json') {
         const pkg = JSON.parse(content);
         pkg.version = version;
-        
-        // Ensure all dependencies match project version
-        const deps = pkg.dependencies || {};
-        Object.keys(deps).forEach(dep => {
-          deps[dep] = version;
+        Object.keys(pkg.dependencies || {}).forEach(dep => {
+          if (dep.startsWith('@gnomatix/')) {
+            pkg.dependencies[dep] = version;
+          }
         });
-        
-        // IMPLEMENTATION: Add all dependencies to bundledDependencies
-        pkg.bundledDependencies = Object.keys(deps);
-        
         content = JSON.stringify(pkg, null, 2);
       }
-
-      fs.writeFileSync(path.join(target, file), content);
+      
+      fs.writeFileSync(destFile, content);
     }
   });
 
-  console.log(`Bundle ${roleName}@${version} prepared with bundledDependencies.`);
-
-  // To support bundledDependencies, we must perform a local install in the build dir
-  // This ensures the dependencies are present in build/*/node_modules before publication.
-  console.log(`  Performing local install for bundling...`);
-  try {
-    execSync(`npm install --no-package-lock --registry https://gitea.gnomatix.com/api/packages/GNOMATIX/npm/`, {
-      cwd: target,
-      stdio: 'inherit'
-    });
-    console.log(`  + Dependencies bundled successfully.`);
-  } catch (e) {
-    console.warn(`  ! Bundling install failed. This may be normal if components aren't published yet.`);
-  }
+  console.log(`Staged ${pkgJson.name}@${version} in build/${pkgName}`);
 });
