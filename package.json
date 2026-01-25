@@ -25,7 +25,7 @@
     "registry": "https://gitea.gnomatix.com/api/packages/GNOMATIX/npm/"
   },
   "license": "BSL-1.1",
-  "author": "Brett Whitty <brett@gnomatix.com>",
+  "author": "Brett Whitty <support@gnomatix.com>",
   "scripts": {
     "build": "node scripts/build-bundles.js",
     "test": "npm run lint && node tests/validate.js",
