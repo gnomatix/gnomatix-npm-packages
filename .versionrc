@@ -3,8 +3,7 @@
   "types": [
     {"type": "feat", "section": "Features"},
     {"type": "fix", "section": "Bug Fixes"},
-    {"type": "chore", "section": "Infrastructure"},
-    {"type": "docs", "section": "Documentation"}
+    {"type": "chore", "section": "Maintenance"}
   ],
   "packageFiles": [
     "package.json",
