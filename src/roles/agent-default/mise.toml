@@ -1,15 +1,33 @@
 [env]
-# Mapping paths to the specialized .agent directory structure
-# Use 'npm install --prefix .agent' to populate this structure
+# Default paths for discovery
+_.rules_path = "{{config.root}}/.agent/rules"
+_.skills_path = "{{config.root}}/.agent/skills"
+_.workflows_path = "{{config.root}}/.agent/workflows"
 
-_.rules_path = "{{config.root}}/.agent/rules/core-behavior"
+[tasks.setup]
+description = "Automatically install and structure the agent environment"
+run = [
+  "npm install --prefix .agent --no-save",
+  # Logic to move rules
+  "mkdir -p .agent/rules .agent/skills .agent/workflows",
+  "cp -r .agent/node_modules/@gnomatix/rule-* .agent/rules/ 2>/dev/null || true",
+  "cp -r .agent/node_modules/@gnomatix/skill-* .agent/skills/ 2>/dev/null || true",
+  "cp -r .agent/node_modules/@gnomatix/workflow-* .agent/workflows/ 2>/dev/null || true",
+  "rm -rf .agent/node_modules"
+]
 
 [env.win11]
-_.os_rules = "{{config.root}}/.agent/rules/powershell-conventions"
-_.os_skills = "{{config.root}}/.agent/skills/powershell-expert"
-
-[env.linux]
-_.os_rules = "{{config.root}}/.agent/rules/posix-conventions"
-
-[env.macos]
-_.os_rules = "{{config.root}}/.agent/rules/posix-conventions"
+# Windows-specific overrides if needed
+[tasks.setup_windows]
+description = "Windows version of setup"
+shell = "powershell"
+run = [
+  "npm install --prefix .agent --no-save",
+  "if (!(Test-Path .agent/rules)) { New-Item -Path .agent/rules -ItemType Directory -Force }",
+  "if (!(Test-Path .agent/skills)) { New-Item -Path .agent/skills -ItemType Directory -Force }",
+  "if (!(Test-Path .agent/workflows)) { New-Item -Path .agent/workflows -ItemType Directory -Force }",
+  "Copy-Item -Path .agent/node_modules/@gnomatix/rule-* -Destination .agent/rules/ -Recurse -Force -ErrorAction SilentlyContinue",
+  "Copy-Item -Path .agent/node_modules/@gnomatix/skill-* -Destination .agent/skills/ -Recurse -Force -ErrorAction SilentlyContinue",
+  "Copy-Item -Path .agent/node_modules/@gnomatix/workflow-* -Destination .agent/workflows/ -Recurse -Force -ErrorAction SilentlyContinue",
+  "Remove-Item -Path .agent/node_modules -Recurse -Force"
+]
