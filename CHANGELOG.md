@@ -1,4 +1,6 @@
 # Changelog
+### [1.3.1](https://gitea.gnomatix.com/GNOMATIX/npm-packages/compare/v1.3.0...v1.3.1) (2026-01-25)
+
 ## [1.3.0](https://gitea.gnomatix.com/GNOMATIX/npm-packages/compare/v1.2.0...v1.3.0) (2026-01-25)
 
 
