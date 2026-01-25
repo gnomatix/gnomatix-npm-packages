@@ -1,0 +1,2 @@
+description = "Remove a Gnomatix agent role from the current workspace using mise."
+command = "mise rm gnomatix:role-{{args}}"
