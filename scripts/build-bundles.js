@@ -8,47 +8,30 @@ if (!env) {
   process.exit(1);
 }
 
-// Build Mode: local (default), dev, or branch
 const mode = process.env.BUILD_MODE || 'local';
-
 const rootDir = path.join(__dirname, '..');
 const rootPkg = JSON.parse(fs.readFileSync(path.join(rootDir, 'package.json'), 'utf8'));
-let baseVersion = rootPkg.version;
+const rolesDir = path.join(rootDir, 'src', 'roles');
+const pkgDir = path.join(rootDir, 'packages');
 
-// Determine dynamic version suffix based on branch/mode
+let baseVersion = rootPkg.version;
 let versionSuffix = '';
+
+// Determine dynamic version suffix
 try {
   const branch = execSync('git rev-parse --abbrev-ref HEAD').toString().trim();
   if (mode === 'dev' || branch === 'develop') {
     const hash = execSync('git rev-parse --short HEAD').toString().trim();
     versionSuffix = `-dev.${hash}`;
-  } else if (mode === 'branch' && branch !== 'master' && branch !== 'develop') {
+  } else if (mode === 'branch' && branch !== 'main' && branch !== 'develop') {
     const cleanBranch = branch.replace(/[^a-zA-Z0-9]/g, '-');
     versionSuffix = `-${cleanBranch}`;
   }
 } catch (e) {
-  console.warn('Git not found or not a repo, using base version.');
+  console.warn('Git context not available, using base version.');
 }
 
 const finalVersion = baseVersion + versionSuffix;
-
-const rolesDir = path.join(rootDir, 'src', 'roles');
-const pkgDir = path.join(rootDir, 'packages');
-
-// Map of all available atomic source packages
-const atomicSourceMap = {};
-['rules', 'skills', 'workflows'].forEach(type => {
-  const typeDir = path.join(rootDir, 'src', type);
-  if (fs.existsSync(typeDir)) {
-    fs.readdirSync(typeDir).forEach(name => {
-      const pkgJsonPath = path.join(typeDir, name, 'package.json');
-      if (fs.existsSync(pkgJsonPath)) {
-        const pkgJson = JSON.parse(fs.readFileSync(pkgJsonPath, 'utf8'));
-        atomicSourceMap[pkgJson.name] = { type, path: path.join(typeDir, name) };
-      }
-    });
-  }
-});
 
 const roles = fs.readdirSync(rolesDir);
 
@@ -62,8 +45,8 @@ roles.forEach(roleName => {
   const baseConfig = JSON.parse(fs.readFileSync(baseJsonPath, 'utf8'));
   const envConfig = fs.existsSync(envJsonPath) ? JSON.parse(fs.readFileSync(envJsonPath, 'utf8')) : {};
 
+  // Merge dependencies and force the current project version
   const mergedDeps = { ...(baseConfig.dependencies || {}), ...(envConfig.dependencies || {}) };
-  // In non-release builds, we often want to target the latest dev version
   Object.keys(mergedDeps).forEach(dep => {
     mergedDeps[dep] = (mode === 'local') ? '*' : finalVersion;
   });
@@ -73,6 +56,7 @@ roles.forEach(roleName => {
 
   if (!fs.existsSync(targetPkgPath)) fs.mkdirSync(targetPkgPath, { recursive: true });
 
+  // Generate the Meta-Package package.json
   const finalPkgJson = {
     name: `@gnomatix/${bundleName}`,
     version: finalVersion,
@@ -86,25 +70,21 @@ roles.forEach(roleName => {
   };
   fs.writeFileSync(path.join(targetPkgPath, 'package.json'), JSON.stringify(finalPkgJson, null, 2));
 
-  ['rules', 'skills', 'workflows'].forEach(dir => {
-    const p = path.join(targetPkgPath, dir);
-    if (fs.existsSync(p)) fs.rmSync(p, { recursive: true, force: true });
-  });
+  console.log(`Meta-Package ${bundleName}@${finalVersion} generated.`);
 
-  Object.entries(mergedDeps).forEach(([pkgName, pkgVersion]) => {
-    const sourcePkg = atomicSourceMap[pkgName];
-    if (sourcePkg) {
-      const targetSubDir = path.join(targetPkgPath, sourcePkg.type);
-      if (!fs.existsSync(targetSubDir)) fs.mkdirSync(targetSubDir, { recursive: true });
-
-      fs.readdirSync(sourcePkg.path).forEach(file => {
-        if (file !== 'package.json' && file !== 'node_modules') {
-          fs.copyFileSync(path.join(sourcePkg.path, file), path.join(targetSubDir, file));
-        }
+  // If in dev or branch mode, attempt to verify dependencies via npm install
+  if (mode !== 'local') {
+    console.log(`  Verifying dependencies for ${bundleName} via npm install...`);
+    try {
+      // We use --dry-run or similar to verify existence without bloating the repo
+      // Note: This requires the components to have been published first
+      execSync(`npm install --package-lock-only --registry https://gitea.gnomatix.com/api/packages/GNOMATIX/npm/`, {
+        cwd: targetPkgPath,
+        stdio: 'inherit'
       });
-      console.log(`  + Inlined ${pkgName} into ${bundleName}`);
+      console.log(`  + Dependencies verified on registry.`);
+    } catch (e) {
+      console.warn(`  ! Dependency verification failed for ${bundleName}. Ensure components are published.`);
     }
-  });
-
-  console.log(`Bundle ${bundleName} version ${finalVersion} assembled.`);
+  }
 });
