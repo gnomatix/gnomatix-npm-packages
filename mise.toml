@@ -6,7 +6,18 @@ node = "20"
 # Use 'mise env --env win11' etc. to load specific overrides.
 
 [tasks.build]
-description = "Assemble bundles for the current MISE_ENV by inlining versioned components"
+description = "Assemble bundles for the current MISE_ENV"
+env = { BUILD_MODE = "local" }
+run = "node scripts/build-bundles.js"
+
+[tasks."build:dev"]
+description = "Assemble development bundles with commit hash suffix"
+env = { BUILD_MODE = "dev" }
+run = "node scripts/build-bundles.js"
+
+[tasks."build:branch"]
+description = "Assemble branch-specific bundles with branch name suffix"
+env = { BUILD_MODE = "branch" }
 run = "node scripts/build-bundles.js"
 
 [tasks."publish:components"]
@@ -19,7 +30,7 @@ run = "npm publish packages/agent-default~${MISE_ENV} --registry https://gitea.g
 
 [tasks.release]
 description = "Complete release: Version -> Publish Components -> Build Bundles -> Publish Bundles"
-depends_on = ["build"]
+depends = ["build"]
 run = [
   "npm run release",
   "mise run publish:components",
