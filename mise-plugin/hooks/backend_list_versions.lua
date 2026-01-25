@@ -1,23 +1,28 @@
-local http = require("http")
-local json = require("json")
+function PLUGIN:BackendListVersions(ctx)
+    local cmd = require("cmd")
+    local json = require("json")
 
--- Logic to list versions of a @gnomatix/* package from Gitea
-function list_versions(ctx)
-  local tool = ctx.tool:gsub("^gnomatix:", "")
-  local package_name = "@gnomatix/" .. tool
-  local registry_url = "https://gitea.gnomatix.com/api/packages/GNOMATIX/npm/"
-  local package_url = registry_url .. package_name:gsub("/", "%%2f")
+    -- Remove gnomatix: prefix if present
+    local tool = ctx.tool:gsub("^gnomatix:", "")
+    -- Prepend @gnomatix/ scope if not present
+    local package_name = tool
+    if not tool:find("^@") then
+        package_name = "@gnomatix/" .. tool
+    end
 
-  local res = http.get(package_url)
-  if res.status ~= 200 then
-    return {}
-  end
+    local registry = "https://gitea.gnomatix.com/api/packages/GNOMATIX/npm/"
+    local npm_cmd = "npm view " .. package_name .. " versions --json --registry " .. registry
+    
+    local result = cmd.exec(npm_cmd)
+    if result.exit_code ~= 0 then
+        return {versions = {}}
+    end
 
-  local metadata = json.decode(res.body)
-  local versions = {}
-  for version, _ in pairs(metadata.versions) do
-    table.insert(versions, version)
-  end
+    local versions = json.decode(result.stdout)
+    -- Handle case where only one version is returned (string instead of table)
+    if type(versions) == "string" then
+        versions = {versions}
+    end
 
-  return versions
+    return {versions = versions}
 end
