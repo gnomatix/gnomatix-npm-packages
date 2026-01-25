@@ -1,16 +1,16 @@
 {
   "name": "@gnomatix/agent-default~win11",
-  "version": "1.0.0",
-  "description": "Baseline agent role template (Environment: win11)",
+  "version": "1.2.0-dev.f2387ad",
+  "description": "Baseline agent role template [Mode: dev] (Env: win11)",
   "publishConfig": {
     "registry": "https://gitea.gnomatix.com/api/packages/GNOMATIX/npm/"
   },
   "dependencies": {
-    "@gnomatix/rule-core-behavior": "*",
-    "@gnomatix/skill-essential-tools": "*",
-    "@gnomatix/workflow-standard-operation": "*",
-    "@gnomatix/rule-powershell-conventions": "*",
-    "@gnomatix/skill-powershell-expert": "*"
+    "@gnomatix/rule-core-behavior": "1.2.0-dev.f2387ad",
+    "@gnomatix/skill-essential-tools": "1.2.0-dev.f2387ad",
+    "@gnomatix/workflow-standard-operation": "1.2.0-dev.f2387ad",
+    "@gnomatix/rule-powershell-conventions": "1.2.0-dev.f2387ad",
+    "@gnomatix/skill-powershell-expert": "1.2.0-dev.f2387ad"
   },
   "author": "Brett Whitty <brett@gnomatix.com>",
   "license": "ISC"
