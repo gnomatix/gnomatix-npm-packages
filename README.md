@@ -95,5 +95,8 @@ We follow a strict **Git Flow** and **Conventional Commits** model.
 
 ---
 
+
+
 ## ⚖️ License
-ISC © [Brett Whitty](mailto:brett@gnomatix.com)
+
+BSL-1.1 © [GNOMATIX Support](mailto:support@gnomatix.com)
