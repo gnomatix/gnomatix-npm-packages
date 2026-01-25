@@ -27,22 +27,32 @@ Everything in this repository is managed as an **npm package**.
 
 
 
-To install a specific role and its dependencies into the specialized `.agent` directory, use the following command:
+The agent environment is managed seamlessly via **`mise`**. To install the default role and its associated rules, skills, and workflows into the structured `.agent/` directory, run:
 
 
 
 ```bash
 
-npm install @gnomatix/role-agent-default --prefix .agent
+# For POSIX (Linux/macOS)
+
+mise run setup
+
+
+
+# For Windows
+
+mise run setup_windows
 
 ```
 
 
 
-This ensures that the rules, skills, and workflows are laid out in the structure expected by the `mise` configuration:
+This task automatically:
 
-- `./.agent/rules/`
+1. Installs the versioned dependencies via `npm`.
 
-- `./.agent/skills/`
+2. Lays out the rule and skill packages into their correct logical directories (`.agent/rules/`, etc.).
 
-- `./.agent/workflows/`
+3. Cleans up the temporary installation artifacts.
+
+
