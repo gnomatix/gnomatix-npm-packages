@@ -23,7 +23,26 @@ Everything in this repository is managed as an **npm package**.
 2. If it's a new "Mode" or "Role", create a new directory in `src/roles/`.
 3. Use `mise run build` to stage packages for publication.
 
-### Releasing
-- **Git Flow**: All development happens on `develop`. Releases move to `main`.
-- **Automated Versioning**: `npm run release` synchronizes all package versions and tags the repository.
-- **Publication**: The release process automatically publishes all source packages and roles to the Gitea registry.
+## Installation
+
+
+
+To install a specific role and its dependencies into the specialized `.agent` directory, use the following command:
+
+
+
+```bash
+
+npm install @gnomatix/role-agent-default --prefix .agent
+
+```
+
+
+
+This ensures that the rules, skills, and workflows are laid out in the structure expected by the `mise` configuration:
+
+- `./.agent/rules/`
+
+- `./.agent/skills/`
+
+- `./.agent/workflows/`
