@@ -36,6 +36,7 @@
     "publish-all:dry": "npm run build && npm publish --workspaces --dry-run"
   },
   "devDependencies": {
+    "@mermaid-js/mermaid-cli": "^11.12.0",
     "standard-version": "^9.5.0"
   }
 }

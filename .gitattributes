@@ -1,0 +1,27 @@
+# GNOMATIX Proprietary Intellect - git-crypt Configuration
+
+# Core "Intellect" - Fully Encrypted
+src/** filter=git-crypt diff=git-crypt
+tests/** filter=git-crypt diff=git-crypt
+
+# Manifests & Metadata - Encrypted to hide logic linkage
+.VERSIONS.json filter=git-crypt diff=git-crypt
+
+# Root metadata - Left unencrypted for GitHub visibility & management
+.gitignore !filter !diff
+.gitattributes !filter !diff
+README.md !filter !diff
+README_DRAFT.md !filter !diff
+package.json !filter !diff
+package-lock.json !filter !diff
+LICENSE !filter !diff
+VERSION !filter !diff
+BUILD_VERSION !filter !diff
+standard-version-updater.js !filter !diff
+.versionrc !filter !diff
+.markdownlint.json !filter !diff
+
+# Exclude common dev-scripts if they don't contain core IP
+scripts/*.js !filter !diff
+# But encrypt the logic within scripts/packages if it holds deployment secrets
+scripts/packages/** filter=git-crypt diff=git-crypt
