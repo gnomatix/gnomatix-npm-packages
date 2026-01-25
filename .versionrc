@@ -1,22 +1,11 @@
 {
-  "header": "# Changelog",
+  "header": "# Repository Infrastructure Changelog\n",
   "types": [
     {"type": "feat", "section": "Features"},
     {"type": "fix", "section": "Bug Fixes"},
-    {"type": "chore", "section": "Maintenance"}
+    {"type": "chore", "section": "Infrastructure"},
+    {"type": "docs", "section": "Documentation"}
   ],
-  "packageFiles": [
-    "package.json",
-    "src/rules/*/package.json",
-    "src/skills/*/package.json",
-    "src/workflows/*/package.json",
-    "src/roles/*/package.json"
-  ],
-  "bumpFiles": [
-    "package.json",
-    "src/rules/*/package.json",
-    "src/skills/*/package.json",
-    "src/workflows/*/package.json",
-    "src/roles/*/package.json"
-  ]
+  "packageFiles": ["package.json"],
+  "bumpFiles": ["package.json"]
 }
