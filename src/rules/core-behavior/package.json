@@ -1,18 +1,18 @@
 {
-    "name":  "@gnomatix/rule-core-behavior",
-    "version":  "1.3.1",
-    "description":  "GNOMATIX rule: core-behavior",
-    "publishConfig":  {
-                          "registry":  "https://gitea.gnomatix.com/api/packages/GNOMATIX/npm/"
-                      },
-    "author":  "Brett Whitty <brett@gnomatix.com>",
-    "license": "BSL-1.1",
-    "os":  [
-               "win32",
-               "darwin",
-               "linux"
-           ],
-    "arch":  [
-                 "x64"
-             ]
+  "name": "@gnomatix/rule-core-behavior",
+  "version": "1.3.1",
+  "description": "GNOMATIX rule: core-behavior",
+  "publishConfig": {
+    "registry": "https://gitea.gnomatix.com/api/packages/GNOMATIX/npm/"
+  },
+  "author": "Brett Whitty <brett@gnomatix.com>",
+  "license": "BSL-1.1",
+  "os": [
+    "win32",
+    "darwin",
+    "linux"
+  ],
+  "arch": [
+    "x64"
+  ]
 }
