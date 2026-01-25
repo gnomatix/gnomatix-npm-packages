@@ -13,6 +13,21 @@ const rootPkg = JSON.parse(fs.readFileSync(path.join(rootDir, 'package.json'), '
 const rolesDir = path.join(rootDir, 'src', 'roles');
 const pkgDir = path.join(rootDir, 'packages');
 
+// Map of all available atomic source packages in this repo
+const atomicSourceMap = {};
+['rules', 'skills', 'workflows'].forEach(type => {
+  const typeDir = path.join(rootDir, 'src', type);
+  if (fs.existsSync(typeDir)) {
+    fs.readdirSync(typeDir).forEach(name => {
+      const pkgJsonPath = path.join(typeDir, name, 'package.json');
+      if (fs.existsSync(pkgJsonPath)) {
+        const pkgJson = JSON.parse(fs.readFileSync(pkgJsonPath, 'utf8'));
+        atomicSourceMap[pkgJson.name] = { type, path: path.join(typeDir, name) };
+      }
+    });
+  }
+});
+
 const roles = fs.readdirSync(rolesDir);
 
 roles.forEach(roleName => {
@@ -26,10 +41,8 @@ roles.forEach(roleName => {
   const roleVersion = baseConfig.version || '1.0.0';
   const envConfig = fs.existsSync(envJsonPath) ? JSON.parse(fs.readFileSync(envJsonPath, 'utf8')) : {};
 
-  // Merge configurations
-  const mergedRules = [...(baseConfig.rules || []), ...(envConfig.rules || [])];
-  const mergedSkills = [...(baseConfig.skills || []), ...(envConfig.skills || [])];
-  const mergedWorkflows = [...(baseConfig.workflows || []), ...(envConfig.workflows || [])];
+  // Merge dependencies
+  const mergedDeps = { ...(baseConfig.dependencies || {}), ...(envConfig.dependencies || {}) };
 
   const bundleName = `${roleName}~${env}`;
   const targetPkgPath = path.join(pkgDir, bundleName);
@@ -44,25 +57,33 @@ roles.forEach(roleName => {
     publishConfig: {
       registry: "https://gitea.gnomatix.com/api/packages/GNOMATIX/npm/"
     },
+    dependencies: mergedDeps,
     author: rootPkg.author,
     license: rootPkg.license
   };
   fs.writeFileSync(path.join(targetPkgPath, 'package.json'), JSON.stringify(finalPkgJson, null, 2));
 
-  // Assemble files
-  const assembly = { rules: mergedRules, skills: mergedSkills, workflows: mergedWorkflows };
-  Object.entries(assembly).forEach(([type, items]) => {
-    const targetSubDir = path.join(targetPkgPath, type);
-    if (!fs.existsSync(targetSubDir)) fs.mkdirSync(targetSubDir, { recursive: true });
+  // Assemble content by resolving dependencies to our local atomic sources
+  ['rules', 'skills', 'workflows'].forEach(dir => {
+    const p = path.join(targetPkgPath, dir);
+    if (fs.existsSync(p)) fs.rmSync(p, { recursive: true, force: true });
+  });
 
-    items.forEach(item => {
-      const source = path.join(rootDir, 'src', type, item);
-      if (fs.existsSync(source)) {
-        fs.readdirSync(source).forEach(file => {
-          fs.copyFileSync(path.join(source, file), path.join(targetSubDir, file));
-        });
-      }
-    });
+  Object.entries(mergedDeps).forEach(([pkgName, pkgVersion]) => {
+    const sourcePkg = atomicSourceMap[pkgName];
+    if (sourcePkg) {
+      const targetSubDir = path.join(targetPkgPath, sourcePkg.type);
+      if (!fs.existsSync(targetSubDir)) fs.mkdirSync(targetSubDir, { recursive: true });
+
+      fs.readdirSync(sourcePkg.path).forEach(file => {
+        if (file !== 'package.json' && file !== 'node_modules') {
+          fs.copyFileSync(path.join(sourcePkg.path, file), path.join(targetSubDir, file));
+        }
+      });
+      console.log(`  + Inlined ${pkgName}@${pkgVersion} into ${bundleName}`);
+    } else {
+      console.warn(`  ! Could not find atomic source for ${pkgName}. Ensure it is defined in src/`);
+    }
   });
 
   console.log(`Bundle ${bundleName} assembled for environment ${env}.`);
