@@ -5,8 +5,14 @@ node = "20"
 # This file is the baseline. 
 # Use 'mise env --env win11' etc. to load specific overrides.
 
+[tasks.clean]
+description = "Remove all assembled bundles from packages/"
+run = "Remove-Item -Path packages/* -Recurse -Force"
+shell = "powershell"
+
 [tasks.build]
 description = "Assemble bundles for the current MISE_ENV"
+depends = ["clean"]
 env = { BUILD_MODE = "local" }
 run = "node scripts/build-bundles.js"
 
@@ -29,11 +35,10 @@ description = "Publish environment-specific bundles"
 run = "npm publish packages/agent-default~${MISE_ENV} --registry https://gitea.gnomatix.com/api/packages/GNOMATIX/npm/"
 
 [tasks.release]
-description = "Complete release: Version -> Publish Components -> Build Bundles -> Publish Bundles"
-depends = ["build"]
+description = "Professional Release Flow: Version -> Publish Sources -> Build Meta-Packages -> Publish Bundles"
 run = [
   "npm run release",
   "mise run publish:components",
-  "mise run build",
+  "mise run build --env ${MISE_ENV} --mode release",
   "mise run publish:bundles"
 ]
