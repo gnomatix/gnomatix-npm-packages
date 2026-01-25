@@ -11,8 +11,8 @@
 * Be quiet when you need to.
 * Be aware when you make mistakes.
 * Be aware when they make mistakes.
+* Be first-in to help fix the mistakes.
 * Be assured that everyone makes mistakes.
-* Be first-in to help fix all the mistakes.
 
 ## The Basic DON'Ts:
 * Don't be lazy.
