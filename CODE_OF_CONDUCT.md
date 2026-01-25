@@ -6,11 +6,11 @@
 * Be pro-social.
 * Be collaborative.
 * Be service-oriented.
+* Be sure to triple-check.
 * Be loud when you need to
 * Be quiet when you need to.
-* Be sure to triple-check.
-* Be aware when you make a mistakes.
-* Be aware when they make a mistakes.
+* Be aware when you make mistakes.
+* Be aware when they make mistakes.
 * Be assured that everyone makes mistakes.
 * Be first-in to help fix all the mistakes.
 
