@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@gnomatix/rule-posix-conventions": "*"
+  }
+}

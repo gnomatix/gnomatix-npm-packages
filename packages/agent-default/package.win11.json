@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@gnomatix/rule-powershell-conventions": "*",
+    "@gnomatix/skill-powershell-expert": "*"
+  }
+}

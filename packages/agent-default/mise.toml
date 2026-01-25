@@ -1,0 +1,15 @@
+[env]
+# The seamless logic: map paths based on the environment tag
+# This uses mise's ability to reference the current environment.
+
+_.rules_path = "{{config.root}}/node_modules/@gnomatix/rule-core-behavior"
+
+[env.win11]
+_.os_rules = "{{config.root}}/node_modules/@gnomatix/rule-powershell-conventions"
+_.os_skills = "{{config.root}}/node_modules/@gnomatix/skill-powershell-expert"
+
+[env.linux]
+_.os_rules = "{{config.root}}/node_modules/@gnomatix/rule-posix-conventions"
+
+[env.macos]
+_.os_rules = "{{config.root}}/node_modules/@gnomatix/rule-posix-conventions"
