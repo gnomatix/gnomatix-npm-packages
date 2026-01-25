@@ -13,41 +13,31 @@ if (!fs.existsSync(pkgDir)) fs.mkdirSync(pkgDir);
 const roles = fs.readdirSync(rolesDir);
 
 roles.forEach(roleName => {
-  const roleBaseDir = path.join(rolesDir, roleName);
-  const targetPkgPath = path.join(pkgDir, roleName);
+  const source = path.join(rolesDir, roleName);
+  const target = path.join(pkgDir, roleName);
 
-  if (!fs.existsSync(targetPkgPath)) fs.mkdirSync(targetPkgPath, { recursive: true });
+  if (!fs.existsSync(target)) fs.mkdirSync(target, { recursive: true });
 
-  // Gather all dependencies from the base and ALL environment overlays
-  const baseJson = JSON.parse(fs.readFileSync(path.join(roleBaseDir, 'package.json'), 'utf8'));
-  const allDeps = { ...(baseJson.dependencies || {}) };
+  // Copy files from src to build package
+  fs.readdirSync(source).forEach(file => {
+    // We only care about config files (json and toml)
+    if (file.endsWith('.json') || file.endsWith('.toml')) {
+      let content = fs.readFileSync(path.join(source, file), 'utf8');
+      
+      // Ensure the version matches the root project
+      if (file === 'package.json') {
+        const pkg = JSON.parse(content);
+        pkg.version = version;
+        // Synchronize all dependencies to this version as well
+        Object.keys(pkg.dependencies || {}).forEach(dep => {
+          pkg.dependencies[dep] = version;
+        });
+        content = JSON.stringify(pkg, null, 2);
+      }
 
-  // Include dependencies from any package.[env].json files
-  fs.readdirSync(roleBaseDir).forEach(file => {
-    if (file.startsWith('package.') && file.endsWith('.json') && file !== 'package.json') {
-      const envConfig = JSON.parse(fs.readFileSync(path.join(roleBaseDir, file), 'utf8'));
-      Object.assign(allDeps, envConfig.dependencies || {});
+      fs.writeFileSync(path.join(target, file), content);
     }
   });
 
-  // Force all dependencies to match the current project version
-  Object.keys(allDeps).forEach(dep => {
-    allDeps[dep] = version;
-  });
-
-  // Generate the clean Universal Meta-Package
-  const finalPkgJson = {
-    name: baseJson.name,
-    version: version,
-    description: baseJson.description + " (Universal Meta-Package)",
-    publishConfig: {
-      registry: "https://gitea.gnomatix.com/api/packages/GNOMATIX/npm/"
-    },
-    dependencies: allDeps,
-    author: rootPkg.author,
-    license: rootPkg.license
-  };
-
-  fs.writeFileSync(path.join(targetPkgPath, 'package.json'), JSON.stringify(finalPkgJson, null, 2));
-  console.log(`Universal Meta-Package ${finalPkgJson.name}@${version} generated.`);
+  console.log(`Bundle ${roleName}@${version} assembled.`);
 });

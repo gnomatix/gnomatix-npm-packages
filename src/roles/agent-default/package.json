@@ -1,10 +1,13 @@
 {
   "name": "@gnomatix/role-agent-default",
   "version": "1.0.0",
-  "description": "Baseline agent role template",
+  "description": "Universal Gnomatix agent role",
   "dependencies": {
     "@gnomatix/rule-core-behavior": "*",
     "@gnomatix/skill-essential-tools": "*",
-    "@gnomatix/workflow-standard-operation": "*"
+    "@gnomatix/workflow-standard-operation": "*",
+    "@gnomatix/rule-posix-conventions": "*",
+    "@gnomatix/rule-powershell-conventions": "*",
+    "@gnomatix/skill-powershell-expert": "*"
   }
 }

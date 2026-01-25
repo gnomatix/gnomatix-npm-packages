@@ -1,10 +1,7 @@
 {
   "name": "@gnomatix/role-agent-default",
   "version": "1.2.0",
-  "description": "Baseline agent role template (Universal Meta-Package)",
-  "publishConfig": {
-    "registry": "https://gitea.gnomatix.com/api/packages/GNOMATIX/npm/"
-  },
+  "description": "Universal Gnomatix agent role",
   "dependencies": {
     "@gnomatix/rule-core-behavior": "1.2.0",
     "@gnomatix/skill-essential-tools": "1.2.0",
@@ -12,7 +9,5 @@
     "@gnomatix/rule-posix-conventions": "1.2.0",
     "@gnomatix/rule-powershell-conventions": "1.2.0",
     "@gnomatix/skill-powershell-expert": "1.2.0"
-  },
-  "author": "Brett Whitty <brett@gnomatix.com>",
-  "license": "ISC"
+  }
 }
