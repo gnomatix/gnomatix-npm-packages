@@ -1,0 +1,12 @@
+[env]
+# Local development overrides: point to the structured .agent directory
+# After running 'mise run setup' (or manual layout), these paths will be active.
+
+_.rules_path = "{{config.root}}/.agent/rules"
+_.skills_path = "{{config.root}}/.agent/skills"
+_.workflows_path = "{{config.root}}/.agent/workflows"
+
+[alias]
+# Add any local development aliases here
+ga = "gemini"
+gar = "mise run build && mise run setup"
