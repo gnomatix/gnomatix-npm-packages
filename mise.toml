@@ -1,9 +1,16 @@
 [tools]
 node = "lts"
 
+[plugins]
+gnomatix = "./mise-plugin"
+
 [env]
 # This file is the baseline. 
 # Use 'mise env --env win11' etc. to load specific overrides.
+
+[tasks.setup_plugin]
+description = "Register the local Gnomatix mise backend plugin"
+run = "mise plugin install gnomatix ./mise-plugin"
 
 [tasks.clean]
 description = "Remove all assembled bundles from build/"

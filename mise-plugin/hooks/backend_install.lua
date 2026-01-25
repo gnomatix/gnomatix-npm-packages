@@ -1,35 +1,37 @@
-local cmd = require("cmd")
-local file = require("file")
+function PLUGIN:BackendInstall(ctx)
+    local cmd = require("cmd")
+    local file = require("file")
 
--- Logic to install a specific @gnomatix package version via npm
-function install(ctx)
-  local tool = ctx.tool:gsub("^gnomatix:", "")
-  local package_name = "@gnomatix/" .. tool
-  local registry_url = "https://gitea.gnomatix.com/api/packages/GNOMATIX/npm/"
+    local tool = ctx.tool:gsub("^gnomatix:", "")
+    local package_name = tool
+    if not tool:find("^@") then
+        package_name = "@gnomatix/" .. tool
+    end
 
-  -- Use npm to install the package directly into the mise-managed path
-  -- We use --prefix to control exactly where the node_modules land
-  local install_cmd = string.format("npm install %s@%s --prefix %s --registry %s --no-save", 
-                                    package_name, ctx.version, ctx.install_path, registry_url)
-  
-  local res = cmd.run(install_cmd)
-  if res.status ~= 0 then
-    error("Failed to install package " .. package_name .. "@" .. ctx.version)
-  end
+    local registry = "https://gitea.gnomatix.com/api/packages/GNOMATIX/npm/"
+    local install_path = ctx.install_path
 
-  -- Structure cleanup: Move the package contents out of node_modules/@gnomatix/pkg
-  -- and into the root of ctx.install_path for clean discovery.
-  local source_path = file.join(ctx.install_path, "node_modules", "@gnomatix", tool)
-  
-  -- Logic to move files (simplified for Lua)
-  -- In production, we'd iterate and copy or use a shell move command
-  if RUNTIME.osType == "windows" then
-    cmd.run(string.format("powershell -Command "Copy-Item -Path %s\* -Destination %s -Recurse -Force"", 
-                          source_path, ctx.install_path))
-  else
-    cmd.run(string.format("cp -r %s/* %s/", source_path, ctx.install_path))
-  end
+    -- Install using npm into the mise install path
+    -- We use --prefix to ensure it lands exactly in the install_path/node_modules
+    local npm_cmd = "npm install " .. package_name .. "@" .. ctx.version .. " --prefix " .. install_path .. " --registry " .. registry .. " --no-save --no-package-lock --silent"
+    
+    local result = cmd.exec(npm_cmd)
+    if result.exit_code ~= 0 then
+        error("Failed to install " .. package_name .. "@" .. ctx.version .. "\n" .. result.stderr)
+    end
 
-  -- Clean up node_modules
-  file.remove_all(file.join(ctx.install_path, "node_modules"))
+    -- Move contents to the root of the install path for easier discovery by the agent
+    local base_name = package_name:gsub("^@gnomatix/", "")
+    local source = file.join(install_path, "node_modules", "@gnomatix", base_name)
+    
+    if RUNTIME.osType == "windows" then
+        cmd.exec("powershell -Command \"Copy-Item -Path '" .. source .. "\\*' -Destination '" .. install_path .. "' -Recurse -Force\"")
+    else
+        cmd.exec("cp -r " .. source .. "/* " .. install_path .. "/")
+    end
+
+    -- Cleanup node_modules
+    file.remove_all(file.join(install_path, "node_modules"))
+
+    return {}
 end
