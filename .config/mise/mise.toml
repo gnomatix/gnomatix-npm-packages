@@ -1,12 +1,46 @@
 [tools]
 node = "lts"
 
-[plugins]
-gnomatix = "{{config_root}}/../../mise-plugin"
+## TODO: Review current 'mise' & 'npm' usage
+##  ...  determine if we can simplify / improve
+##  ...  user experience by using the environment
+##  ...  plugin feature of 'mise'.
+##
+## Install an environment plugin
+##   mise plugin install my-env-plugin https://github.com/username/my-env-plugin
+##
+## Configure in mise.toml
+## [env]
+##   _.my-env-plugin = { api_url = "https://api.example.com", debug = true }
+##
+## TODO: END OF TODO
 
 [env]
+_.git-env = { production_branch = "main", development_branch = "develop" }
+## _.my-env-plugin = { api_url = "https://gitea.gnomatix.com/GNOMATIX/npm-packages/raw/branch/main/VERSION", debug = true }
+## BUG: Again we are using relative paths here!!!
 # Point to root VERSION file (two levels up from .config/mise)
 BUILD_VERSION = "{{ exec(command='cat ' ~ config_root ~ '/../../VERSION') | trim }}"
+
+#[tool_alias.gnomatix.versions]
+#current = "{{exec(command='node --version')}}"
+
+[plugins]
+## BUG: 
+## Using a relative path here is *stupid* and *dangerous*!!!
+## We should be able to determine the repo root using 'git'!
+## This *must* be available as an environment variable that
+## is set by one of: 'mise', 'npm', or 'git'!!!
+## NOTE: We should be preferentially using the handlebars-style
+## template format and variables that 'mise' support!
+# ==> gnomatix = "{{config_root}}/../../mise-plugin"
+## TODO: ^-- Any reason we are using it like this?
+##  ...  Instead of maintaining it in its own repo
+##  ...  and installing it using:
+##  ...    mise install plugin gno https://gitea.gnomatix.com/GNOMATIX/gno-mise-plugin
+## BUG: ^-----------------------------------^
+
+
 
 [tasks.setup_plugin]
 description = "Register the local Gnomatix mise backend plugin"
