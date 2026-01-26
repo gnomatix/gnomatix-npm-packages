@@ -1,0 +1,2 @@
+CRITICAL FAILURE: Agent overwrote user content without prompt.
+CRITICAL FAILURE: Agent overwrote user content without prompt.

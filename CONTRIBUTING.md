@@ -1,8 +1,18 @@
+---
+title: Contributing to GNOMATIX NPM Packages
+copyright: GNOMATIX
+author: Brett Whitty <brett@gnomatix.com>
+license: BSL-1.1
+version: @VERSION
+git-uri: https://gitea.gnomatix.com/GNOMATIX/npm-packages/src/branch/develop
+path: CONTRIBUTING.md
+---
+
 # Contributing to GNOMATIX NPM Packages
 
 First off, thank you for considering contributing to GNOMATIX! It's people like you that make this instructional registry great.
 
-## ðŸ› ï¸ Development Setup
+## 🛠️ Development Setup
 
 This project uses **`mise`** for all tool management.
 
@@ -16,14 +26,14 @@ This project uses **`mise`** for all tool management.
    mise run setup_plugin
    ```
 
-## ðŸŒ¿ Branching Model
+## 🌿 Branching Model
 
 We follow the **Git Flow** model:
 - `develop` is the main integration branch.
 - Always create a `feature/` or `fix/` branch from `develop`.
 - PRs should be targeted at the `develop` branch.
 
-## ðŸ’¬ Commit Messages
+## 💬 Commit Messages
 
 We use **Conventional Commits**. Please ensure your commit messages follow this format:
 - `feat:` for a new rule, skill, or workflow.
@@ -31,7 +41,7 @@ We use **Conventional Commits**. Please ensure your commit messages follow this 
 - `docs:` for documentation changes.
 - `chore:` for maintenance.
 
-## ðŸ§ª Testing and Linting
+## 🧪 Testing and Linting
 
 Before submitting a PR, please ensure your changes pass all checks:
 ```bash
@@ -39,7 +49,7 @@ npm test
 ```
 This will run the JSON validation, dependency mapping tests, and Markdown linting.
 
-## ðŸ“¦ Creating a Release
+## 📦 Creating a Release
 
 Releases are automated using `standard-version`. Only project maintainers should perform releases.
 ```bash
