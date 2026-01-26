@@ -1,18 +1,12 @@
 # <img src="./assets/gnomatix-x-logo.png" width="40" height="40" align="center"> GNOMATIX Presents: Agentic Infrastructure as Code (IaC)
 
-![GNOMATIX Hero Illustration](./assets/gnomatix_hero.png)
+![GNOMATIX Sizzle Demo](./assets/gnomatix-ai-sizzle.gif)
 
 > **Implementing Deterministic State Management and Versioned Instruction Provisioning for Generative Agents.**
 
 ![License](https://img.shields.io/badge/license-BSL--1.1-blue)
 ![Architecture](https://img.shields.io/badge/arch-Agentic--IaC-orange)
 ![Release](https://img.shields.io/badge/version-1.3.2-green)
-
----
-
-## ✨ See it in Action
-
-![GNOMATIX Sizzle Demo](./assets/gnomatix-ai-sizzle.gif)
 
 ---
 
