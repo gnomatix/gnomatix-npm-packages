@@ -1,5 +1,6 @@
 [tools]
 node = "lts"
+npm = "latest"
 
 ## TODO: Review current 'mise' & 'npm' usage
 ##  ...  determine if we can simplify / improve
@@ -16,7 +17,7 @@ node = "lts"
 ## TODO: END OF TODO
 
 [env]
-_.git-env = { production_branch = "main", development_branch = "develop" }
+#_.git-env = { production_branch = "main", development_branch = "develop" }
 ## _.my-env-plugin = { api_url = "https://gitea.gnomatix.com/GNOMATIX/npm-packages/raw/branch/main/VERSION", debug = true }
 ## BUG: Again we are using relative paths here!!!
 # Point to root VERSION file (two levels up from .config/mise)

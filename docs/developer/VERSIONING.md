@@ -1,3 +1,13 @@
+---
+title: Versioning Policy
+copyright: GNOMATIX
+author: Brett Whitty <brett@gnomatix.com>
+license: BSL-1.1
+version: @VERSION
+git-uri: https://gitea.gnomatix.com/GNOMATIX/npm-packages/src/branch/develop
+path: docs/developer/VERSIONING.md
+---
+
 # Versioning Policy
 
 This repository implements an independent, content-driven versioning strategy for all instructional components and role configurations.

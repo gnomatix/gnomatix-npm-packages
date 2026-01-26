@@ -1,3 +1,13 @@
+---
+title: GNOMATIX NPM Packages - Project Rules
+copyright: GNOMATIX
+author: Brett Whitty <brett@gnomatix.com>
+license: BSL-1.1
+version: @VERSION
+git-uri: https://gitea.gnomatix.com/GNOMATIX/npm-packages/src/branch/develop
+path: GEMINI.md
+---
+
 # GNOMATIX NPM Packages - Project Rules
 
 This repository manages curated bundles of Gemini CLI rules, skills, and workflows.
