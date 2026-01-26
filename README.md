@@ -1,4 +1,5 @@
-# <img src="./assets/gnomatix-x-logo.png" width="40" height="40" align="center"> GNOMATIX Presents: `gno` Agentic Infrastructure Development Kit
+# <img src="./assets/gnomatix-x-logo.png" width="40" height="40" align="center"> GNOMATIX Presents:
+## The `gno` Agentic Infrastructure Development Kit
 
 ![GNOMATIX Sizzle Demo](./assets/gnomatix-ai-sizzle.gif)
 
