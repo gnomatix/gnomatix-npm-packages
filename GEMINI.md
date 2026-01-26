@@ -10,7 +10,25 @@ path: GEMINI.md
 
 # GNOMATIX NPM Packages - Project Rules
 
-This repository manages curated bundles of Gemini CLI rules, skills, and workflows.
+This repository manages curated bundles of Gemini CLI rules, skills, and workflows. All files must adhere to the **GNOMATIX File Specification**.
+
+## GNOMATIX File Specification
+
+To ensure deterministic provisioning and validation, every Markdown file (`.md`) in `src/` and the root directory MUST include standard YAML frontmatter and a synchronized body header.
+
+### Mandatory Metadata
+The following fields are required in the frontmatter:
+- `title`: Semantic name of the component.
+- `copyright`: "GNOMATIX".
+- `author`: "Brett Whitty <brett@gnomatix.com>".
+- `license`: "BSL-1.1".
+- `version`: Reference to the version source (e.g., `@VERSION`).
+- `git-uri`: Reference to the source repository and branch.
+- `path`: **MUST** match the relative file path from the repository root.
+
+### Document Structure
+- **Synchronized H1**: The document body MUST begin with exactly one H1 header that matches the YAML `title` field.
+- **Validation**: Compliance is enforced by `tests/validate.js` and `markdownlint`.
 
 ## Development Workflow
 
@@ -36,5 +54,7 @@ All commits MUST follow the [Conventional Commits](https://www.conventionalcommi
 
 ## Directory Structure
 - `src/`: Atomic "sub-packages" (Rules, Skills, Workflows).
-- `packages/`: Curated functional "Roles" published as npm packages.
+- `packages/`: Curated functional "Roles" (Legacy).
 - `scripts/`: Build and curation logic.
+- `tests/`: Structural and semantic validation suite.
+- `.agent/`: Active agent configuration and workflows.
