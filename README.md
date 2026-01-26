@@ -1,38 +1,76 @@
-# GNOMATIX NPM Packages
+# <img src="./assets/gnomatix-x-logo.png" width="40" height="40" align="center"> GNOMATIX Presents: Agentic Infrastructure as Code (IaC)
 
-> **The professional registry for Gemini CLI and Antigravity rules, skills, and workflows.**
+![GNOMATIX Hero Illustration](./assets/gnomatix_hero.png)
+
+> **Implementing Deterministic State Management and Versioned Instruction Provisioning for Generative Agents.**
 
 ![License](https://img.shields.io/badge/license-BSL--1.1-blue)
-![Version](https://img.shields.io/badge/version-0.1.0--infra-green)
+![Architecture](https://img.shields.io/badge/arch-Agentic--IaC-orange)
+![Release](https://img.shields.io/badge/version-1.3.2-green)
 
-This repository serves as the primary development environment and distribution hub for GNOMATIX instructional components. It leverages a multi-tiered architecture to deliver composed agent "Roles" via a custom `mise` backend.
+---
 
-## 🚀 Quick Start
+## ✨ See it in Action
 
-To use these rules in your local project:
+![GNOMATIX Sizzle Demo](./assets/gnomatix-ai-sizzle.gif)
 
-1. **Install the Mise Plugin**:
-   ```bash
-   mise plugin install gnomatix https://gitea.gnomatix.com/GNOMATIX/npm-packages.git
-   ```
+---
 
-2. **Activate a Role**:
-   ```bash
-   mise use gnomatix:role-agent-default@latest
-   ```
+## 🏗️ Architectural Vision
 
-## 📖 Documentation
+This repository provides a robust framework for managing **Agentic Intelligence as a Distributed Configuration System**. We move beyond heuristic prompting by treating agent constraints—Rules, Skills, and Workflows—as immutable, versioned, and programmatically provisioned infrastructure.
 
-Detailed guides and specifications are available in the [**docs/**](./docs/) directory:
+GNOMATIX bridges the gap between static instructional definitions and a live agent runtime, ensuring that every interaction is governed by a deterministic and reproducible state.
 
-- [**User Guide**](./docs/user/README.md): Installation and consumption instructions.
-- [**Developer Notes**](./docs/developer/README.md): Information for rule authors and maintainers.
-- [**Architectural Overview**](./docs/ARCHITECTURAL_OVERVIEW.md): Detailed system design.
-- [**Versioning Policy**](./docs/developer/VERSIONING.md): Our checksum-based release flow.
+### Core Engineering Pillars
+*   **Atomic Instruction Packaging**: Every logic component is a standalone, versioned NPM package, enabling granular dependency management and lifecycle control.
+*   **Deterministic Provisioning**: Leveraging `mise` as an execution engine to atomically materialize agent environments from a private, **open-source Gitea-hosted registry**.
+*   **Conversational Orchestration**: A specialized Gemini CLI Extension that facilitates real-time role reification and state-switching mid-session.
+*   **Full-Lifecycle Ecosystem Integration**: Deeply coupled with **Gitea Issue Tracking and Wiki systems**, providing a unified substrate for agentic task execution, knowledge management, and auditability.
+*   **Environment-Aware Distribution**: Automated OS and architectural filtering via standard Node.js metadata and custom deployment hooks.
 
-## 🤝 Contributing
+---
 
-We welcome contributions! Please see [**CONTRIBUTING.md**](./CONTRIBUTING.md) for local setup instructions and our [**CODE_OF_CONDUCT.md**](./CODE_OF_CONDUCT.md).
+## 🚀 Deployment & Activation
+
+The GNOMATIX ecosystem is designed for seamless integration into existing engineering workflows.
+
+### 1. Unified Activation Flow
+Agents are provisioned using high-level roles that encapsulate all necessary behavioral constraints:
+
+```bash
+/role agent-default
+```
+
+This command initiates an atomic pull-extract-materialize cycle, handled by our custom `mise` backend, instantly reifying the agent's operating environment.
+
+### 2. State Mapping
+Workspace states are encoded in `mise.toml`, providing a clear audit trail and lockfile for the agent's active instructional set.
+
+---
+
+## 🧬 Infrastructure Components
+
+| Layer | Function | Implementation |
+| :--- | :--- | :--- |
+| **Rules** ⚖️ | Behavioral Constraints | Immutable Markdown definitions versioned as atomic packages. |
+| **Skills** 🛠️ | Capability Extensions | Programmatic interfaces and tool-calling specifications. |
+| **Workflows** 🔄 | Procedural Logic | Step-by-step operational procedures for complex task execution. |
+| **Roles** 📦 | Composite Archetypes | Curated bundles defining a specific agent mission or persona. |
+
+---
+
+![GNOMATIX Orchestration Logic](./assets/gnomatix_orchestration.png)
+
+---
+
+## 🛠️ Contribution & Development
+
+This repository serves as an iterative sandbox for the development of agentic infrastructure.
+
+*   [**Architectural Deep Dive**](./docs/ARCHITECTURAL_OVERVIEW.md)
+*   [**Development Workflows**](./docs/developer/README.md)
+*   [**Versioning Policy**](./docs/developer/VERSIONING.md)
 
 ---
 
