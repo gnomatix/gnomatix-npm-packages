@@ -1,0 +1,18 @@
+{
+  "name": "@gnomatix/workflow-standard-operation",
+  "version": "1.3.3",
+  "description": "GNOMATIX workflow: standard-operation",
+  "publishConfig": {
+    "registry": "https://gitea.gnomatix.com/api/packages/GNOMATIX/npm/"
+  },
+  "author": "Brett Whitty <support@gnomatix.com>",
+  "license": "BSL-1.1",
+  "os": [
+    "win32",
+    "darwin",
+    "linux"
+  ],
+  "arch": [
+    "x64"
+  ]
+}

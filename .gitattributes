@@ -3,6 +3,7 @@
 # Core "Intellect" - Fully Encrypted
 src/** filter=git-crypt diff=git-crypt
 tests/** filter=git-crypt diff=git-crypt
+.agent/** filter=git-crypt diff=git-crypt
 
 # Manifests & Metadata - Encrypted to hide logic linkage
 .VERSIONS.json filter=git-crypt diff=git-crypt
