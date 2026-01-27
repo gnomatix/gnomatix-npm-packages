@@ -1,0 +1,15 @@
+{
+  "name": "@gnomatix/bundle-dipshit",
+  "version": "1.0.0",
+  "description": "Dipshit protocol bundle: Rules and workflows for agent self-correction.",
+  "dependencies": {
+    "@gnomatix/rule-dipshit-prevention": "latest",
+    "@gnomatix/rule-dipshit-achievement": "latest",
+    "@gnomatix/workflow-dipshit": "latest"
+  },
+  "publishConfig": {
+    "registry": "https://gitea.gnomatix.com/api/packages/GNOMATIX/npm/"
+  },
+  "author": "Brett Whitty <support@gnomatix.com>",
+  "license": "BSL-1.1"
+}
