@@ -1,5 +1,6 @@
 ---
 title: GNOMATIX NPM Packages - Project Rules
+description: Core repository rules and development guidelines for the GNOMATIX instruction registry.
 ---
 
 # GNOMATIX NPM Packages - Project Rules
