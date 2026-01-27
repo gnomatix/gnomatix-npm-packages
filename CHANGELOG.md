@@ -1,4 +1,66 @@
-# Changelog
+# Repository Infrastructure Changelog
+
+### [0.1.1](https://gitea.gnomatix.com/GNOMATIX/npm-packages/compare/v1.3.2...v0.1.1) (2026-01-27)
+
+
+### Features
+
+* add local development mise configuration and aliases ([3b3db73](https://gitea.gnomatix.com/GNOMATIX/npm-packages/commit/3b3db73319dbbfc992ee948449162575336adb8f))
+* add new skill, workflow, and rule definitions along with a metadata validation script. ([aa32063](https://gitea.gnomatix.com/GNOMATIX/npm-packages/commit/aa320635c98ed3f267359df810130bf508106c16))
+* implement automated agent setup via mise tasks ([1fba2d8](https://gitea.gnomatix.com/GNOMATIX/npm-packages/commit/1fba2d8af4fa274862a467e8c96daa57f33f1c86))
+* implement Gemini CLI management extension with slash commands ([ef0ef28](https://gitea.gnomatix.com/GNOMATIX/npm-packages/commit/ef0ef28c8f025437cbe688a4ef496802976d6c8f))
+* implement industrial-standard repo templates and community guides ([b80b5e9](https://gitea.gnomatix.com/GNOMATIX/npm-packages/commit/b80b5e97df5ca04c01d8407305ae4725215b4821))
+* implement initial gnomatix mise backend plugin ([7f1029c](https://gitea.gnomatix.com/GNOMATIX/npm-packages/commit/7f1029c09f3b9960e84661dfc62f277e8513a510))
+* implement vfox-style gnomatix backend plugin for mise ([fcd6c92](https://gitea.gnomatix.com/GNOMATIX/npm-packages/commit/fcd6c92c6642185ea71babb4e667906b3e7dd853))
+* Introduce agent dipshit prevention rules, self-correction workflows, new skills, and comprehensive documentation. ([d156c48](https://gitea.gnomatix.com/GNOMATIX/npm-packages/commit/d156c484115f8b63e97bc7dc9fa778ca4cafe4ff))
+* **templates:** add and validate standards-compliant templates ([399b42d](https://gitea.gnomatix.com/GNOMATIX/npm-packages/commit/399b42d100eaa99037a0e655b53cd40bd69fca72))
+
+
+### Bug Fixes
+
+* Issues with standards ([1299cf5](https://gitea.gnomatix.com/GNOMATIX/npm-packages/commit/1299cf591ad53944a456b2ba583a12158d1c1c67))
+* **lint:** resolve markdown linting errors ([15b70d0](https://gitea.gnomatix.com/GNOMATIX/npm-packages/commit/15b70d0c1e1de0a0dc2a851f0246178393305e1e))
+* **metadata:** make 'description' mandatory for all packages ([56c3741](https://gitea.gnomatix.com/GNOMATIX/npm-packages/commit/56c3741b306b9df4afa298badfb93f300419feed))
+* **metadata:** restore 'title' as mandatory for all packages ([a8fa2eb](https://gitea.gnomatix.com/GNOMATIX/npm-packages/commit/a8fa2ebb71fd783ae0bbcce8ee8c962d69c34faf))
+* strip non-compliant frontmatter attributes and remove from regular docs ([47fa4d4](https://gitea.gnomatix.com/GNOMATIX/npm-packages/commit/47fa4d4014dca353853db4e5340bda2bcd9b1678))
+* **validate:** enforce 'name' and 'description' for skills, 'title' for others ([eb155c0](https://gitea.gnomatix.com/GNOMATIX/npm-packages/commit/eb155c06617e9b3a6ea58b1ba173d2b67aa6aa69))
+* **validate:** enforce valid rule triggers ([3bd746e](https://gitea.gnomatix.com/GNOMATIX/npm-packages/commit/3bd746e0d71243e8dc4fb237029fc0d3d960755b))
+* **validate:** restore original templates and adapt validation logic ([7d53161](https://gitea.gnomatix.com/GNOMATIX/npm-packages/commit/7d53161dabd0fc5286f79070bbfd2c2e28d26673))
+* **validate:** use .gitignore for file filtering ([bb6d2a5](https://gitea.gnomatix.com/GNOMATIX/npm-packages/commit/bb6d2a537d5bcb54f8832ac2c07f169475c9a7ae))
+* version strings and dependencies ([6c37c1f](https://gitea.gnomatix.com/GNOMATIX/npm-packages/commit/6c37c1f1bf4eccdeb891bf04275605c1a5d79b60))
+
+
+### Documentation
+
+* "Improvements" to the README; new rule to disallow "cringe" text patterns ([dd5f913](https://gitea.gnomatix.com/GNOMATIX/npm-packages/commit/dd5f91351855014e095ea659fe2793b1fded9a61))
+* establish docs directory and move versioning policy ([460010a](https://gitea.gnomatix.com/GNOMATIX/npm-packages/commit/460010acaeb8538eee535bda10bb51c2c90dcd4e))
+* establish professional root README and move detailed architecture to docs ([fa34aa6](https://gitea.gnomatix.com/GNOMATIX/npm-packages/commit/fa34aa6002f8999cae0f3e151a293bfac0a8c2be))
+* Fix ([4225f10](https://gitea.gnomatix.com/GNOMATIX/npm-packages/commit/4225f10348c71d25ddb54ec5c4e14f802d971203))
+* Fixes to README ([9ae5d32](https://gitea.gnomatix.com/GNOMATIX/npm-packages/commit/9ae5d32be6a3e6a668bf5037d769c04fff49997f))
+* Introduce GEMINI.md outlining rules for AI agent response quality and structured status reporting. ([c3a8021](https://gitea.gnomatix.com/GNOMATIX/npm-packages/commit/c3a802179beb57f2322ab818538a73c11559419a))
+* Minor edits ([ca7834b](https://gitea.gnomatix.com/GNOMATIX/npm-packages/commit/ca7834b2a713c99a9e276d9ca6459af91c028d41))
+* overhaul README to reflect mise backend architecture and tiered release flow ([2e34fbe](https://gitea.gnomatix.com/GNOMATIX/npm-packages/commit/2e34fbe318405d4e150f120d30c260d6fb61fa08))
+* reorganize into developer and user sections ([c7ec978](https://gitea.gnomatix.com/GNOMATIX/npm-packages/commit/c7ec978b2461bdb7e1b20c1c319aae7b4264b032))
+* update all contact points to support@gnomatix.com and align license references to BSL-1.1 ([eb9bd61](https://gitea.gnomatix.com/GNOMATIX/npm-packages/commit/eb9bd615218980873c0819994f1d85314b24c9e5))
+* update code of conduct to reflect core gnomatix standards ([2510665](https://gitea.gnomatix.com/GNOMATIX/npm-packages/commit/251066569dc7e2f1ebc14f4aea4313af0a816494))
+
+
+### Infrastructure
+
+* align mise logic and documentation with .agent directory convention ([5ccf15d](https://gitea.gnomatix.com/GNOMATIX/npm-packages/commit/5ccf15d1f1c3e1957fd1bf39f1a2fa7b7f8bdca5))
+* implement Business Source License 1.1 and fix mise configurations ([66bc0f0](https://gitea.gnomatix.com/GNOMATIX/npm-packages/commit/66bc0f00bc50d28be2b94460d43d679dff18096a))
+* implement environment-driven versioning with  placeholders ([7639d9e](https://gitea.gnomatix.com/GNOMATIX/npm-packages/commit/7639d9e18069c9478898e733ca6286c8475687a0))
+* implement independent versioning and latest dependency strategy ([fa7ae87](https://gitea.gnomatix.com/GNOMATIX/npm-packages/commit/fa7ae876cd3a64a317656272f10b4745e5ea4428))
+* In-process revisions ([1703614](https://gitea.gnomatix.com/GNOMATIX/npm-packages/commit/170361467e7d88c8fda814137d65409c6fd652b4))
+* remove accidental temp files and update .gitignore ([962dac3](https://gitea.gnomatix.com/GNOMATIX/npm-packages/commit/962dac334db2652df7231963b44919baaf3df319))
+* remove temporary cleanup scripts ([2117e34](https://gitea.gnomatix.com/GNOMATIX/npm-packages/commit/2117e344f9f03c1d4c2fc97421724e46609e7879))
+* reorganize configurations into .config/dir and implement independent versioning policy ([9651b72](https://gitea.gnomatix.com/GNOMATIX/npm-packages/commit/9651b726b80601c882795cfb4d9ec598eb61e855))
+* **rules:** rename instruction files to RULE.md ([8af53e9](https://gitea.gnomatix.com/GNOMATIX/npm-packages/commit/8af53e9e36b802f294b6fab0084459077c47c169))
+* simplify mise release task and synchronize versions at 1.3.1 ([3de3189](https://gitea.gnomatix.com/GNOMATIX/npm-packages/commit/3de3189c50ce450a017aa1c8acf77065330c635e))
+* simplify to generic package-first architecture and update README ([11b8ac3](https://gitea.gnomatix.com/GNOMATIX/npm-packages/commit/11b8ac3dbd6ca9604f5450e09309f3da74383403))
+* use explicit dependency versions in roles and simplify build script to respect source versions ([81281f2](https://gitea.gnomatix.com/GNOMATIX/npm-packages/commit/81281f28782fb0c81acccc6ab1a57da3e94835be))
+* **version:** bump atomic package versions ([4a6059c](https://gitea.gnomatix.com/GNOMATIX/npm-packages/commit/4a6059c632eb2ce87d92f961aa05d55067a59e10))
+
 ### [1.3.2](https://gitea.gnomatix.com/GNOMATIX/npm-packages/compare/v1.3.1...v1.3.2) (2026-01-25)
 
 
