@@ -1,5 +1,25 @@
 # Repository Infrastructure Changelog
 
+### [0.1.2](https://gitea.gnomatix.com/GNOMATIX/npm-packages/compare/v0.1.1...v0.1.2) (2026-01-27)
+
+
+### Features
+
+* **bundles:** add dipshit bundle ([132d5c5](https://gitea.gnomatix.com/GNOMATIX/npm-packages/commit/132d5c5a66d5b2b9dc4a5eb0843d426db4baf3ed))
+* **release:** safe publish script ([8b8f8ca](https://gitea.gnomatix.com/GNOMATIX/npm-packages/commit/8b8f8ca6234774076632302969d3c4ed16a188e0))
+
+
+### Bug Fixes
+
+* **build:** only stage changed packages ([becf8d8](https://gitea.gnomatix.com/GNOMATIX/npm-packages/commit/becf8d8d61557e12d62af10ac710851b3c36aacd))
+* **release:** bump all packages to resolve publishing conflict ([659bb70](https://gitea.gnomatix.com/GNOMATIX/npm-packages/commit/659bb70f8a4f123ee4b890cf04b43f3d8469d893))
+
+
+### Infrastructure
+
+* **release:** update .VERSIONS.json manifest ([6c71ca1](https://gitea.gnomatix.com/GNOMATIX/npm-packages/commit/6c71ca1968b4e7f0605fc99176da0ada85cdb396))
+* remove redundant _bundles directory ([bcc9ce1](https://gitea.gnomatix.com/GNOMATIX/npm-packages/commit/bcc9ce15c51668313e352d16f43097c534d0feb6))
+
 ### [0.1.1](https://gitea.gnomatix.com/GNOMATIX/npm-packages/compare/v1.3.2...v0.1.1) (2026-01-27)
 
 
