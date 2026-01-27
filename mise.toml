@@ -10,6 +10,8 @@ BUILD_VERSION = "{{ exec(command='git show HEAD:VERSION') | trim }}"
 GNOMATIX_RULES_PATH = "{{ exec(command='git rev-parse --show-toplevel') | trim }}/.agent/rules"
 GNOMATIX_SKILLS_PATH = "{{ exec(command='git rev-parse --show-toplevel') | trim }}/.agent/skills"
 GNOMATIX_WORKFLOWS_PATH = "{{ exec(command='git rev-parse --show-toplevel') | trim }}/.agent/workflows"
+## Examples: poopyhead -> cG9vcHloZWFk, dodobird -> ZG9kb2JpcmQ=, frack -> ZnJhY2s=
+SANITIZATION_RULES = "cG9vcHloZWFk:💩,ZG9kb2JpcmQ=:🦤,ZnJhY2s=:🤬"
 
 [plugins]
 # Native npm backend used; no local plugin required.

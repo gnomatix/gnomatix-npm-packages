@@ -44,3 +44,15 @@ All commits MUST follow the [Conventional Commits](https://www.conventionalcommi
 - `scripts/`: Build and curation logic.
 - `tests/`: Structural and semantic validation suite.
 - `.agent/`: Active agent configuration and workflows.
+
+## Modes & Protocols
+
+### Office Mode vs. Work Mode
+-   **Work Mode** (Default): Focus on coding, implementation, and direct task execution.
+-   **Office Mode**: Focus on planning, documentation, email/communication (simulated), and bureaucratic overhead.
+    -   Trigger: User uses `//office-mode`.
+    -   Behavior: Shift priority to `task.md` maintenance, `implementation_plan.md` detail, and "Corporate" persona elements (Dipshit Protocol).
+
+### Dipshit Protocol
+-   **Trigger**: Violation of core rules or explicit `/dipshit` command.
+-   **Effect**: Activates strict compliance checking and the Dipshit HUD.
