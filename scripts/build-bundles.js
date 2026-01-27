@@ -56,25 +56,31 @@ packages.forEach(pkgSourcePath => {
       git_hash: currentHash,
       path: relativePath
     };
-  }
 
-  const shortName = pkgName.split('/').pop();
-  const targetPath = path.join(buildDir, shortName);
-  if (!fs.existsSync(targetPath)) fs.mkdirSync(targetPath, { recursive: true });
-
-  fs.readdirSync(pkgSourcePath).forEach(file => {
-    if (file === 'node_modules') return;
-    const srcFile = path.join(pkgSourcePath, file);
-    const destFile = path.join(targetPath, file);
-
-    if (fs.statSync(srcFile).isDirectory()) {
-      fs.cpSync(srcFile, destFile, { recursive: true });
-    } else {
-      fs.copyFileSync(srcFile, destFile);
+    const shortName = pkgName.split('/').pop();
+    const targetPath = path.join(buildDir, shortName);
+    if (fs.existsSync(targetPath)) {
+        // Clean up previous build if it exists to ensure freshness
+        fs.rmSync(targetPath, { recursive: true, force: true });
     }
-  });
+    fs.mkdirSync(targetPath, { recursive: true });
 
-  console.log(`Staged ${pkgName}@${activeVersion} in build/${shortName}`);
+    fs.readdirSync(pkgSourcePath).forEach(file => {
+      if (file === 'node_modules') return;
+      const srcFile = path.join(pkgSourcePath, file);
+      const destFile = path.join(targetPath, file);
+
+      if (fs.statSync(srcFile).isDirectory()) {
+        fs.cpSync(srcFile, destFile, { recursive: true });
+      } else {
+        fs.copyFileSync(srcFile, destFile);
+      }
+    });
+
+    console.log(`Staged ${pkgName}@${activeVersion} in build/${shortName}`);
+  } else {
+      console.log(`- Skipping ${pkgName}@${activeVersion} (Unchanged)`);
+  }
 });
 
 fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + '\n');
