@@ -1,3 +1,7 @@
+---
+title: GNOMATIX NPM Packages - Project Rules
+---
+
 # GNOMATIX NPM Packages - Project Rules
 
 This repository manages curated bundles of Gemini CLI rules, skills, and workflows. All files must adhere to the **GNOMATIX File Specification**.

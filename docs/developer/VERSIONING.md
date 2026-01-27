@@ -19,7 +19,7 @@ Every package in this repository is an independent unit with its own lifecycle. 
 
 A package version is **only** bumped when its internal content actually changes. Packages that remain static (e.g., a frozen set of Git rules) will stay at their current version indefinitely.
 
-## 2. Dependency Management (The "latest" Strategy)
+## 2. Dependency Management
 Bundle packages (Roles and Modes) SHOULD use the `"latest"` distribution tag for their internal dependencies on atomic packages.
 
 - **Seamless Resolution**: This ensures that bundles always resolve to the most recently published version of a rule or skill at install-time.

@@ -1,13 +1,3 @@
----
-title: Contributing to GNOMATIX NPM Packages
-copyright: GNOMATIX
-author: Brett Whitty <brett@gnomatix.com>
-license: BSL-1.1
-version: @VERSION
-git-uri: https://gitea.gnomatix.com/GNOMATIX/npm-packages/src/branch/develop
-path: CONTRIBUTING.md
----
-
 # Contributing to GNOMATIX NPM Packages
 
 First off, thank you for considering contributing to GNOMATIX! It's people like you that make this instructional registry great.
