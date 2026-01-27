@@ -9,7 +9,7 @@ This repository manages curated bundles of Gemini CLI rules, skills, and workflo
 
 ## GNOMATIX File Specification
 
-Standards-compliant templates are maintained and validated under `src/templates`.
+Standards-compliant templates are maintained and validated under `src/_templates`.
 
 ### Document Structure
   **Skills are Standards-Compliant**: Markdown files for **skills** must comply with `https://agentskills.io` open standards.
