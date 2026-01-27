@@ -23,7 +23,8 @@
     "url": "https://gitea.gnomatix.com/GNOMATIX/npm-packages"
   },
   "publishConfig": {
-    "registry": "https://gitea.gnomatix.com/api/packages/GNOMATIX/npm/"
+    "registry": "https://gitea.gnomatix.com/api/packages/GNOMATIX/npm/",
+    "access": "restricted"
   },
   "license": "BSL-1.1",
   "author": "Brett Whitty <support@gnomatix.com>",

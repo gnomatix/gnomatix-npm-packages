@@ -3,6 +3,9 @@
   "version": "1.0.2",
   "description": "Trigger a comprehensive self-audit of agent behavior against all active rules.",
   "publishConfig": {
-    "registry": "https://gitea.gnomatix.com/api/packages/GNOMATIX/npm/"
-  }
+    "registry": "https://gitea.gnomatix.com/api/packages/GNOMATIX/npm/",
+    "access": "restricted"
+  },
+  "author": "Brett Whitty <support@gnomatix.com>",
+  "license": "BSL-1.1"
 }

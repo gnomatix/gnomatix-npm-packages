@@ -8,7 +8,8 @@
     "@gnomatix/workflow-dipshit": "latest"
   },
   "publishConfig": {
-    "registry": "https://gitea.gnomatix.com/api/packages/GNOMATIX/npm/"
+    "registry": "https://gitea.gnomatix.com/api/packages/GNOMATIX/npm/",
+    "access": "restricted"
   },
   "author": "Brett Whitty <support@gnomatix.com>",
   "license": "BSL-1.1"

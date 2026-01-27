@@ -1,0 +1,18 @@
+{
+  "name": "@gnomatix/rule-dipshit-hud",
+  "version": "1.0.0",
+  "description": "Standardized HUD/Footer format for agent responses when in Dipshit Protocol.",
+  "main": "RULE.md",
+  "publishConfig": {
+    "registry": "https://gitea.gnomatix.com/api/packages/GNOMATIX/npm/",
+    "access": "restricted"
+  },
+  "author": "Brett Whitty <support@gnomatix.com>",
+  "license": "BSL-1.1",
+  "keywords": [
+    "gemini",
+    "rule",
+    "dipshit",
+    "hud"
+  ]
+}

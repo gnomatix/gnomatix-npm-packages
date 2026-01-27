@@ -1,7 +1,7 @@
 [tools]
 node = "lts"
 npm = "latest"
-"gnomatix:bundle-dipshit" = "latest"
+"npm:@gnomatix/bundle-dipshit" = "latest"
 
 [env]
 # Detect the project root using git
@@ -12,8 +12,11 @@ GNOMATIX_SKILLS_PATH = "{{ exec(command='git rev-parse --show-toplevel') | trim 
 GNOMATIX_WORKFLOWS_PATH = "{{ exec(command='git rev-parse --show-toplevel') | trim }}/.agent/workflows"
 
 [plugins]
-# Register the local gnomatix plugin
-gnomatix = "{{ exec(command='git rev-parse --show-toplevel') | trim }}/mise-plugin"
+# Native npm backend used; no local plugin required.
+
+[tasks.materialize]
+description = "Materialize rules, skills, and workflows from installed bundles into .agent/"
+run = "node scripts/materialize-bundles.js"
 
 [tasks.setup_plugin]
 description = "Register the local Gnomatix mise backend plugin"
