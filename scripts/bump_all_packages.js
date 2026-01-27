@@ -18,7 +18,7 @@ function bumpPackage(dir) {
   console.log(`Bumped ${pkg.name}: ${oldVer} -> ${pkg.version}`);
 }
 
-['rules', 'skills', 'workflows'].forEach(type => {
+['rules', 'skills', 'workflows', 'roles', 'modes'].forEach(type => {
   const typeDir = path.join(srcDir, type);
   if (fs.existsSync(typeDir)) {
     fs.readdirSync(typeDir).forEach(pkgName => {

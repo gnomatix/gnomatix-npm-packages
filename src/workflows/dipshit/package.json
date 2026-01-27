@@ -1,6 +1,6 @@
 {
   "name": "@gnomatix/workflow-dipshit",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Trigger a comprehensive self-audit of agent behavior against all active rules.",
   "main": "WORKFLOW.md",
   "publishConfig": {
