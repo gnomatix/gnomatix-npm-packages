@@ -1,0 +1,7 @@
+description = "Trigger the Dipshit Protocol for immediate self-audit and correction."
+prompt = """Trigger the **Dipshit Protocol**. 
+
+Follow the instructions in `workflows/dipshit/SKILL.md` (or the equivalent materialized workflow) to perform an immediate self-audit of your behavior against all active rules.
+
+{{args}}
+"""
