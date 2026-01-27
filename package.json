@@ -7,7 +7,8 @@
     "src/rules/*",
     "src/skills/*",
     "src/workflows/*",
-    "src/roles/*"
+    "src/roles/*",
+    "src/bundles/*"
   ],
   "keywords": [
     "npm",
