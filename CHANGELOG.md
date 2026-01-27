@@ -1,5 +1,18 @@
 # Repository Infrastructure Changelog
 
+### [0.1.3](https://gitea.gnomatix.com/GNOMATIX/npm-packages/compare/v0.1.2...v0.1.3) (2026-01-27)
+
+
+### Features
+
+* **mise:** finalize root-aware configuration and plugin hooks ([3b4d252](https://gitea.gnomatix.com/GNOMATIX/npm-packages/commit/3b4d252cf6cf943de67080f0145bb455a6f23b7d))
+
+
+### Bug Fixes
+
+* **deploy:** use dynamic package name in logs ([bda18b5](https://gitea.gnomatix.com/GNOMATIX/npm-packages/commit/bda18b56f1d7dfcda09e603a26fac0336cae9d2d))
+* **mise:** use absolute path to deploy script ([3852fba](https://gitea.gnomatix.com/GNOMATIX/npm-packages/commit/3852fba090f7ce030ea68bb68614c5b675994787))
+
 ### [0.1.2](https://gitea.gnomatix.com/GNOMATIX/npm-packages/compare/v0.1.1...v0.1.2) (2026-01-27)
 
 
