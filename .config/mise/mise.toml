@@ -1,61 +1,23 @@
-[tools]
-node = "lts"
-npm = "latest"
-
-## TODO: Review current 'mise' & 'npm' usage
-##  ...  determine if we can simplify / improve
-##  ...  user experience by using the environment
-##  ...  plugin feature of 'mise'.
-##
-## Install an environment plugin
-##   mise plugin install my-env-plugin https://github.com/username/my-env-plugin
-##
-## Configure in mise.toml
-## [env]
-##   _.my-env-plugin = { api_url = "https://api.example.com", debug = true }
-##
-## TODO: END OF TODO
-
 [env]
-#_.git-env = { production_branch = "main", development_branch = "develop" }
-## _.my-env-plugin = { api_url = "https://gitea.gnomatix.com/GNOMATIX/npm-packages/raw/branch/main/VERSION", debug = true }
-## BUG: Again we are using relative paths here!!!
-# Point to root VERSION file (two levels up from .config/mise)
-BUILD_VERSION = "{{ exec(command='cat ' ~ config_root ~ '/../../VERSION') | trim }}"
-
-#[tool_alias.gnomatix.versions]
-#current = "{{exec(command='node --version')}}"
+# Get the build version directly from the VERSION file in git
+BUILD_VERSION = "{{ exec(command='git show HEAD:VERSION') | trim }}"
 
 [plugins]
-## BUG: 
-## Using a relative path here is *stupid* and *dangerous*!!!
-## We should be able to determine the repo root using 'git'!
-## This *must* be available as an environment variable that
-## is set by one of: 'mise', 'npm', or 'git'!!!
-## NOTE: We should be preferentially using the handlebars-style
-## template format and variables that 'mise' support!
-# ==> gnomatix = "{{config_root}}/../../mise-plugin"
-## TODO: ^-- Any reason we are using it like this?
-##  ...  Instead of maintaining it in its own repo
-##  ...  and installing it using:
-##  ...    mise install plugin gno https://gitea.gnomatix.com/GNOMATIX/gno-mise-plugin
-## BUG: ^-----------------------------------^
-
-
+gnomatix = "{{ exec(command='git rev-parse --show-toplevel') | trim }}/mise-plugin"
 
 [tasks.setup_plugin]
 description = "Register the local Gnomatix mise backend plugin"
-run = "mise plugin install gnomatix {{config_root}}/../../mise-plugin"
+run = "mise plugin install gnomatix {{ exec(command='git rev-parse --show-toplevel') | trim }}/mise-plugin"
 
 [tasks.clean]
 description = "Remove all assembled bundles from build/"
-run = "Remove-Item -Path {{config_root}}/../../build/* -Recurse -Force"
+run = "Remove-Item -Path {{ exec(command='git rev-parse --show-toplevel') | trim }}/build/* -Recurse -Force"
 shell = "powershell"
 
 [tasks.build]
 description = "Assemble universal meta-package bundles"
 depends = ["clean"]
-run = "node {{config_root}}/../../scripts/build-bundles.js"
+run = "node {{ exec(command='git rev-parse --show-toplevel') | trim }}/scripts/build-bundles.js"
 
 [tasks."publish:components"]
 description = "Publish all atomic rules, skills, and workflows at current version"
@@ -63,7 +25,7 @@ run = "npm publish --workspaces --if-present --registry https://gitea.gnomatix.c
 
 [tasks."publish:bundles"]
 description = "Publish universal meta-packages"
-run = "npm publish {{config_root}}/../../build/* --registry https://gitea.gnomatix.com/api/packages/GNOMATIX/npm/"
+run = "npm publish {{ exec(command='git rev-parse --show-toplevel') | trim }}/build/* --registry https://gitea.gnomatix.com/api/packages/GNOMATIX/npm/"
 
 [tasks.release]
 description = "Full release: Version -> Publish Components -> Build Meta-Packages -> Publish Bundles"

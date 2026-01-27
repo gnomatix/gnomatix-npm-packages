@@ -1,0 +1,47 @@
+[tools]
+node = "lts"
+npm = "latest"
+"gnomatix:bundle-dipshit" = "latest"
+
+[env]
+# Detect the project root using git
+GNOMATIX_ROOT = "{{ exec(command='git rev-parse --show-toplevel') | trim }}"
+BUILD_VERSION = "{{ exec(command='git show HEAD:VERSION') | trim }}"
+GNOMATIX_RULES_PATH = "{{ exec(command='git rev-parse --show-toplevel') | trim }}/.agent/rules"
+GNOMATIX_SKILLS_PATH = "{{ exec(command='git rev-parse --show-toplevel') | trim }}/.agent/skills"
+GNOMATIX_WORKFLOWS_PATH = "{{ exec(command='git rev-parse --show-toplevel') | trim }}/.agent/workflows"
+
+[plugins]
+# Register the local gnomatix plugin
+gnomatix = "{{ exec(command='git rev-parse --show-toplevel') | trim }}/mise-plugin"
+
+[tasks.setup_plugin]
+description = "Register the local Gnomatix mise backend plugin"
+run = "mise plugin install gnomatix {{ exec(command='git rev-parse --show-toplevel') | trim }}/mise-plugin"
+
+[tasks.clean]
+description = "Remove all assembled bundles from build/"
+run = "Remove-Item -Path {{ exec(command='git rev-parse --show-toplevel') | trim }}/build/* -Recurse -Force"
+shell = "powershell"
+
+[tasks.build]
+description = "Assemble universal meta-package bundles"
+depends = ["clean"]
+run = "node {{ exec(command='git rev-parse --show-toplevel') | trim }}/scripts/build-bundles.js"
+
+[tasks."publish:components"]
+description = "Publish all atomic rules, skills, and workflows at current version"
+run = "npm publish --workspaces --if-present --registry https://gitea.gnomatix.com/api/packages/GNOMATIX/npm/"
+
+[tasks."publish:bundles"]
+description = "Publish universal meta-packages"
+run = "npm publish {{ exec(command='git rev-parse --show-toplevel') | trim }}/build/* --registry https://gitea.gnomatix.com/api/packages/GNOMATIX/npm/"
+
+[tasks.release]
+description = "Full release: Version -> Publish Components -> Build Meta-Packages -> Publish Bundles"
+run = [
+  "npm run release",
+  "mise run publish:components",
+  "mise run build",
+  "mise run publish:bundles"
+]
