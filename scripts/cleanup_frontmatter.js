@@ -45,17 +45,12 @@ mdFiles.forEach(filePath => {
   let newFmText = originalFmText;
   let changed = false;
 
-  const currentKeysToRemove = [...keysToRemove];
-  if (isSkill) {
-    currentKeysToRemove.push('title');
-  }
-
   const lines = originalFmText.split(/\r?\n/);
   const newLines = lines.filter(line => {
     const parts = line.split(':');
     if (parts.length >= 2) {
       const key = parts[0].trim();
-      if (currentKeysToRemove.includes(key)) {
+      if (keysToRemove.includes(key)) {
         changed = true;
         return false;
       }
