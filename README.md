@@ -1,13 +1,3 @@
----
-title: The gno Agentic Infrastructure Development Kit
-copyright: GNOMATIX
-author: Brett Whitty <brett@gnomatix.com>
-license: BSL-1.1
-version: @VERSION
-git-uri: https://gitea.gnomatix.com/GNOMATIX/npm-packages/src/branch/develop
-path: README.md
----
-
 # The `gno` Agentic Infrastructure Development Kit
 
 ![Project Overview](./assets/gnomatix-ai-sizzle.gif)
@@ -67,7 +57,7 @@ Workspace states are encoded in `mise.toml`, providing an audit trail and lockfi
 ```mermaid
 %%{init: {'themeVariables': { 'fontSize': '11px', 'subgraphFontSize': '12px'}}}%%
 graph TD
-    subgraph Source["Source (Instructional Design)"]
+    subgraph Source["Source"]
         A["Atomic Rules/Skills/Workflows"]
     end
 
@@ -76,7 +66,7 @@ graph TD
         B -->|publish| C["Gitea (Registry / Issues / Wiki)"]
     end
 
-    subgraph Runtime["Local Runtime (The Sandbox)"]
+    subgraph Runtime["Local Runtime"]
         C -->|mise install/upgrade| D["Materialized .agent/ Store"]
         D -->|environment injection| E["Gemini CLI Session"]
         E -->|provisioning command| D

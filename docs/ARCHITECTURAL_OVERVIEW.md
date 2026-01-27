@@ -38,7 +38,7 @@ Global and environment-specific configurations are located in the [`.config/mise
 
 ---
 
-## 🚀 Consumption (Using the Rules)
+## 🚀 Usage
 
 The primary way to use these packages is via the custom **Gnomatix `mise` Backend**.
 
@@ -61,7 +61,7 @@ The backend handles the `npm install` and correctly structures the content into 
 
 ---
 
-## 🛠️ Development (Adding Rules)
+## 🛠️ Development
 
 ### Local Environment Setup
 This repo uses **`mise`** for all internal tooling.

@@ -1,13 +1,3 @@
----
-title: Contributor Covenant Code of Conduct
-copyright: GNOMATIX
-author: Brett Whitty <brett@gnomatix.com>
-license: BSL-1.1
-version: @VERSION
-git-uri: https://gitea.gnomatix.com/GNOMATIX/npm-packages/src/branch/develop
-path: CODE_OF_CONDUCT.md
----
-
 # Contributor Covenant Code of Conduct
 
 ## 🟢 The Basic DOs:
