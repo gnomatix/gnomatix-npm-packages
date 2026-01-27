@@ -1,34 +1,15 @@
----
-title: GNOMATIX NPM Packages - Project Rules
-copyright: GNOMATIX
-author: Brett Whitty <brett@gnomatix.com>
-license: BSL-1.1
-version: @VERSION
-git-uri: https://gitea.gnomatix.com/GNOMATIX/npm-packages/src/branch/develop
-path: GEMINI.md
----
-
 # GNOMATIX NPM Packages - Project Rules
 
 This repository manages curated bundles of Gemini CLI rules, skills, and workflows. All files must adhere to the **GNOMATIX File Specification**.
 
 ## GNOMATIX File Specification
 
-To ensure deterministic provisioning and validation, every Markdown file (`.md`) in `src/` and the root directory MUST include standard YAML frontmatter and a synchronized body header.
-
-### Mandatory Metadata
-The following fields are required in the frontmatter:
-- `title`: Semantic name of the component.
-- `copyright`: "GNOMATIX".
-- `author`: "Brett Whitty <brett@gnomatix.com>".
-- `license`: "BSL-1.1".
-- `version`: Reference to the version source (e.g., `@VERSION`).
-- `git-uri`: Reference to the source repository and branch.
-- `path`: **MUST** match the relative file path from the repository root.
+Standards-compliant templates are maintained and validated under `src/templates`.
 
 ### Document Structure
-- **Synchronized H1**: The document body MUST begin with exactly one H1 header that matches the YAML `title` field.
-- **Validation**: Compliance is enforced by `tests/validate.js` and `markdownlint`.
+  **Skills are Standards-Compliant**: Markdown files for **skills** must comply with `https://agentskills.io` open standards.
+  **Rules and Workflows Follow Template**: Project workspace templates define minimal standards for **rules**, **workflows**, **roles**, & **modes**.
+- **Validation**: Compliance is enforced by `tests/validate.js` and `markdownlint`. Skills files validation uses: `https://github.com/agentskills/agentskills/tree/main/skills-ref`
 
 ## Development Workflow
 
