@@ -33,6 +33,7 @@ let modifiedCount = 0;
 mdFiles.forEach(filePath => {
   if (!fs.existsSync(filePath)) return;
   const content = fs.readFileSync(filePath, 'utf8');
+  const isSkill = filePath.endsWith('SKILL.md');
   
   // Extract Frontmatter using RegExp constructor to avoid literal newline issues
   const fmRegex = new RegExp('^---\\r?\\n([\\s\\S]*?)\\r?\\n---');
@@ -44,12 +45,17 @@ mdFiles.forEach(filePath => {
   let newFmText = originalFmText;
   let changed = false;
 
+  const currentKeysToRemove = [...keysToRemove];
+  if (isSkill) {
+    currentKeysToRemove.push('title');
+  }
+
   const lines = originalFmText.split(/\r?\n/);
   const newLines = lines.filter(line => {
     const parts = line.split(':');
     if (parts.length >= 2) {
       const key = parts[0].trim();
-      if (keysToRemove.includes(key)) {
+      if (currentKeysToRemove.includes(key)) {
         changed = true;
         return false;
       }
