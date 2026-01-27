@@ -37,23 +37,34 @@ try {
     if (!fs.existsSync(extractionDir)) fs.mkdirSync(extractionDir, { recursive: true });
     execSync(`tar -xzf "${tarPath}" -C "${extractionDir}" --strip-components=1`);
 
-    if (typeCategory === 'rule' || typeCategory === 'workflow') {
-        const targetDir = path.join(agentDir, typeCategory + 's');
+    if (typeCategory === 'rule') {
+        // Rules are flattened to .agent/rules/name.md
+        const targetDir = path.join(agentDir, 'rules');
         if (!fs.existsSync(targetDir)) fs.mkdirSync(targetDir, { recursive: true });
         
-        // Rules use RULE.md, Workflows use SKILL.md in source
-        const sourceFile = typeCategory === 'rule' ? 'RULE.md' : 'SKILL.md';
         const targetFile = path.join(targetDir, `${name}.md`);
-        
-        fs.copyFileSync(path.join(extractionDir, sourceFile), targetFile);
+        fs.copyFileSync(path.join(extractionDir, 'RULE.md'), targetFile);
         console.log(`    -> Flattened to ${path.relative(agentDir, targetFile)}`);
+    } else if (typeCategory === 'workflow') {
+        // Workflows are materialized to .agent/workflows/name/GEMINI.md
+        const targetPath = path.join(agentDir, 'workflows', name);
+        if (fs.existsSync(targetPath)) fs.rmSync(targetPath, { recursive: true, force: true });
+        fs.mkdirSync(targetPath, { recursive: true });
+        
+        // Copy content and rename the main file
+        fs.cpSync(extractionDir, targetPath, { recursive: true });
+        const oldFile = path.join(targetPath, 'SKILL.md');
+        const newFile = path.join(targetPath, 'GEMINI.md');
+        if (fs.existsSync(oldFile)) {
+            fs.renameSync(oldFile, newFile);
+        }
+        console.log(`    -> Materialized to ${path.relative(agentDir, targetPath)}/GEMINI.md`);
     } else {
-        // Skills remain as directories
+        // Skills remain as directories: .agent/skills/name/SKILL.md
         const targetPath = path.join(agentDir, 'skills', name);
         if (fs.existsSync(targetPath)) fs.rmSync(targetPath, { recursive: true, force: true });
         fs.mkdirSync(targetPath, { recursive: true });
         
-        // Copy everything from extractionDir to targetPath
         fs.cpSync(extractionDir, targetPath, { recursive: true });
         console.log(`    -> Materialized to ${path.relative(agentDir, targetPath)}/`);
     }
