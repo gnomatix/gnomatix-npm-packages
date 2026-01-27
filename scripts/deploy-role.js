@@ -13,7 +13,7 @@ const pkgJson = JSON.parse(fs.readFileSync(path.join(roleDir, 'package.json'), '
 const version = pkgJson.version;
 const dependencies = pkgJson.dependencies || {};
 
-console.log(`Deploying @gnomatix/role-agent-default@${version} for ${envTag}...`);
+console.log(`Deploying ${pkgJson.name}@${version} for ${envTag}...`);
 
 // Create a unique temporary directory for this specific install process
 const tmpDir = path.join(roleDir, `.tmp-install-${crypto.randomBytes(4).toString('hex')}`);
