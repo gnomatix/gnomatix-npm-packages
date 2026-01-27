@@ -1,0 +1,19 @@
+{
+  "name": "@gnomatix/skill-sanitization",
+  "version": "0.1.0",
+  "description": "GNOMATIX skill: sanitization",
+  "publishConfig": {
+    "registry": "https://gitea.gnomatix.com/api/packages/GNOMATIX/npm/",
+    "access": "restricted"
+  },
+  "author": "Brett Whitty <support@gnomatix.com>",
+  "license": "BSL-1.1",
+  "os": [
+    "win32",
+    "darwin",
+    "linux"
+  ],
+  "arch": [
+    "x64"
+  ]
+}
