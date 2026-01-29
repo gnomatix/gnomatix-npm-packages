@@ -1,5 +1,12 @@
 # Repository Infrastructure Changelog
 
+### [0.1.6](https://gitea.gnomatix.com/GNOMATIX/npm-packages/compare/v0.1.5...v0.1.6) (2026-01-29)
+
+
+### Infrastructure
+
+* implement md5sum and markdown signing in build ([742b4e9](https://gitea.gnomatix.com/GNOMATIX/npm-packages/commit/742b4e9f499481349adfc21f7e7a920008ee5aba))
+
 ### [0.1.5](https://gitea.gnomatix.com/GNOMATIX/npm-packages/compare/v0.1.4...v0.1.5) (2026-01-29)
 
 ### [0.1.4](https://gitea.gnomatix.com/GNOMATIX/npm-packages/compare/v0.1.3...v0.1.4) (2026-01-29)
