@@ -1,5 +1,31 @@
 # Repository Infrastructure Changelog
 
+### [0.1.4](https://gitea.gnomatix.com/GNOMATIX/npm-packages/compare/v0.1.3...v0.1.4) (2026-01-29)
+
+
+### Features
+
+* add agent rules for dipshit prevention and define the associated HUD. ([982a2ed](https://gitea.gnomatix.com/GNOMATIX/npm-packages/commit/982a2ed1f5ad00fb09e61e0406d605d9d2d60cf9))
+* Add text sanitization skill and introduce new agent protocols for OS command execution, work modes, and Gitea CLI usage. ([6f57658](https://gitea.gnomatix.com/GNOMATIX/npm-packages/commit/6f5765823caced8e9f1d369017dc82bb62dc94ad))
+* enforce package security and compliance validation ([eaa5d3e](https://gitea.gnomatix.com/GNOMATIX/npm-packages/commit/eaa5d3ef6a60673952ba500c8e591c75a04360c4))
+* finalize sanitization skill and compliance ([d0c7866](https://gitea.gnomatix.com/GNOMATIX/npm-packages/commit/d0c786687cc8a29984a41cec88d1a384ed8906d7))
+* migrate legacy skills to workflow format ([c95e720](https://gitea.gnomatix.com/GNOMATIX/npm-packages/commit/c95e720d6f2f09bf915d3cd71164cf7550054028))
+* **plugin:** finalize backend hooks ([efaac2e](https://gitea.gnomatix.com/GNOMATIX/npm-packages/commit/efaac2e10f2e4767ce33d43834f2440d4e76cc37))
+
+
+### Bug Fixes
+
+* **deploy:** comply with structural flattening specification ([452887d](https://gitea.gnomatix.com/GNOMATIX/npm-packages/commit/452887deddf6ee9544cfe7e40996275242156192))
+* restore source naming and implement compliant materialization ([4258dd7](https://gitea.gnomatix.com/GNOMATIX/npm-packages/commit/4258dd7783513283fea214f62ba9df04c5abcb01))
+
+
+### Infrastructure
+
+* ignore agent directories in git ([3eeef91](https://gitea.gnomatix.com/GNOMATIX/npm-packages/commit/3eeef91169f3ee056e41ba2432b82d339145d878))
+* remove local deployment script ([e197484](https://gitea.gnomatix.com/GNOMATIX/npm-packages/commit/e197484014faa5b75e8a3590bc03b9a8e71a6ac8))
+* retroactively encrypt and restore sensitive sub-packages after history scrub ([ec198da](https://gitea.gnomatix.com/GNOMATIX/npm-packages/commit/ec198dabcb077148488b2861f415ec0db6cdc275))
+* synchronize mandatory artifact rules across source and live config ([77519fe](https://gitea.gnomatix.com/GNOMATIX/npm-packages/commit/77519fec66344bc530cd85a1d0d5c21592ae6093))
+
 ### [0.1.3](https://gitea.gnomatix.com/GNOMATIX/npm-packages/compare/v0.1.2...v0.1.3) (2026-01-27)
 
 

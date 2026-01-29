@@ -1,6 +1,6 @@
 {
   "name": "npm-packages",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "private": true,
   "description": "GNOMATIX NPM package registry development environment",
   "workspaces": [
@@ -34,10 +34,11 @@
     "lint": "npx markdownlint-cli src/**/*.md --config .markdownlint.json",
     "release": "standard-version",
     "postrelease": "npm run publish-all",
-    "publish-all": "npm run build && node scripts/publish_changed.js",
+    "publish-all": "npm run build && node scripts/publish-build-artifacts.js",
     "publish-all:dry": "npm run build && npm publish --workspaces --dry-run"
   },
   "devDependencies": {
+    "chalk": "^4.0.0",
     "@mermaid-js/mermaid-cli": "^11.12.0",
     "standard-version": "^9.5.0"
   }
