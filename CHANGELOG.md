@@ -1,5 +1,7 @@
 # Repository Infrastructure Changelog
 
+### [0.1.5](https://gitea.gnomatix.com/GNOMATIX/npm-packages/compare/v0.1.4...v0.1.5) (2026-01-29)
+
 ### [0.1.4](https://gitea.gnomatix.com/GNOMATIX/npm-packages/compare/v0.1.3...v0.1.4) (2026-01-29)
 
 
