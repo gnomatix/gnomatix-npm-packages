@@ -1,23 +1,121 @@
+# PROJECT_WORKSPACE/mise.toml
+#experimental_monorepo_root = false
+#[monorepo]
+#config_roots = [
+#    "src/",
+#    "utils/"
+#]
+
+[settings]
+experimental = true
+
+[tools]
+gum = "latest"
+node = "lts"
+npm = "latest"
+"npm:chalk" = "latest"
+"npm:winston" = "3"
+#"npm:@gnomatix/bundle-dipshit" = "latest"
+
 [env]
+# Standardized Workspace Root
+REPO_ROOT = "{{ exec(command='git rev-parse --show-toplevel') | trim }}"
+
+## NOTE:
+##   'WORKSPACE_ROOT' is used to provide an absolute path at runtime
+##   for the various tools and support scripts.
+## WARN:
+##   There is *zero* guarantee that [[ WORKSPACE_ROOT == REPO_ROOT ]]
+##   will always be true. Repository refactoring may break this assumption.
+## TODO:
+##   Moving '.config/mise/mise.toml' => 'mise.toml' would allow:
+##     WORKSPACE_ROOT = "{{ config_root }}"
+##   Which is safer, and would also allow for (almost) seamless transition
+##   to using the 'monorepo' funcationality that mise provides.
+## INFO:
+##   Enabling 'monorepo_root' would cause task commands to be prefixed
+##   with the path to their defining toml file location, relative to
+##   the monorepo_root. eg: '//create' TODO: confirm
+WORKSPACE_ROOT = "{{ env.REPO_ROOT }}"
+
 # Get the build version directly from the VERSION file in git
 BUILD_VERSION = "{{ exec(command='git show HEAD:VERSION') | trim }}"
 
-[plugins]
-gnomatix = "{{ exec(command='git rev-parse --show-toplevel') | trim }}/mise-plugin"
+# OS-Dependent Path Logic Blocks
+# Adding shims directory to the PATH so that mise can find our custom wrappers
+#_.path = "{% if os() == 'windows' %}{{ config_root }}/utils/shims/pwsh{% else %}{{ config_root }}/utils/shims/bash{% endif %}"
+_.path = "{% if os() == 'windows' %}{{ env.REPO_ROOT }}/utils/shims/pwsh{% else %}{{ env.REPO_ROOT }}/utils/shims/bash{% endif %}"
 
+## v--- ___CONFIGURABLE SETTINGS BLOCK BEGINS____ ---v
+##
+## TODO: Consider putting this into a mise.local.toml file
+##       \__ Actually, this could be duplicated and then
+##           it would over-ride these default values on load.
+##
+## Examples: poopyhead -> cG9vcHloZWFk, dodobird -> ZG9kb2JpcmQ=, frack -> ZnJhY2s=
+SANITIZATION_RULES = "cG9vcHloZWFk:💩,ZG9kb2JpcmQ=:🦤,ZnJhY2s=:🤬"
+
+# Global Gum Styling (Inherited by scripts/info.js etc.)
+# Note: Gum style flags use their names directly as environment variables.
+BORDER = "double"
+FOREGROUND = "212"
+BORDER_FOREGROUND = "212"
+ALIGN = "center"
+MARGIN = "1 2"
+PADDING = "1 2"
+## ^--- ___CONFIGURABLE SETTINGS BLOCK BEGINS____ ---^
+
+
+## v--- Provides a shell alias for 'gno' command line ---v
+[shell_alias]
+# This section is kept for POSIX compatibility (bash/zsh/fish)
+gno = "mise run"
+
+[hooks.enter]
+shell = "pwsh"
+script = "Set-Alias -Name gno -Value 'gno.ps1' -Scope Global"
+## ^--- Provides a shell alias for 'gno' command line ---^
+
+## TODO: Plugin code is **broken**.
+#[plugins]
+#gnomatix = "{{ exec(command='git rev-parse --show-toplevel') | trim }}/mise-plugin"
+## TODO __/
+
+##
+## INFO: These commands are available with 'mise run' or 'gno' alias ---v
+##
+
+## BUG: I don't think this command should be run
+##  \__ **unless** it's using npm to install from the private npm repo.
+## NOTE: **No** local installs / copying from src => .agent !!!
+[tasks.materialize]
+description = "Materialize rules, skills, and workflows from installed bundles into .agent/"
+run = "node scripts/materialize-bundles.js"
+### ^--- See above!!! 
+
+## BUG: I don't think this is currently working
 [tasks.setup_plugin]
 description = "Register the local Gnomatix mise backend plugin"
 run = "mise plugin install gnomatix {{ exec(command='git rev-parse --show-toplevel') | trim }}/mise-plugin"
+### ^--- See above!!! 
 
 [tasks.clean]
 description = "Remove all assembled bundles from build/"
-run = "Remove-Item -Path {{ exec(command='git rev-parse --show-toplevel') | trim }}/build/* -Recurse -Force"
+run = "Remove-Item -Path {{ env.REPO_ROOT }}/build/* -Recurse -Force"
 shell = "powershell"
 
-[tasks.build]
+##
+## TODO:
+##   - Confirm these 'cmd:subcommand' commands can be executed like:
+##
+##      mise run command subcommand
+##  
+##   - If not, refactor to use the new cli script that uses 'gum'
+##
+[tasks."build:bundles"]
 description = "Assemble universal meta-package bundles"
 depends = ["clean"]
-run = "node {{ exec(command='git rev-parse --show-toplevel') | trim }}/scripts/build-bundles.js"
+run = "node {{ env.REPO_ROOT }}/scripts/build-bundles.js"
 
 [tasks."publish:components"]
 description = "Publish all atomic rules, skills, and workflows at current version"
@@ -25,7 +123,7 @@ run = "npm publish --workspaces --if-present --registry https://gitea.gnomatix.c
 
 [tasks."publish:bundles"]
 description = "Publish universal meta-packages"
-run = "npm publish {{ exec(command='git rev-parse --show-toplevel') | trim }}/build/* --registry https://gitea.gnomatix.com/api/packages/GNOMATIX/npm/"
+run = "npm publish {{ env.REPO_ROOT }}/build/* --registry https://gitea.gnomatix.com/api/packages/GNOMATIX/npm/"
 
 [tasks.release]
 description = "Full release: Version -> Publish Components -> Build Meta-Packages -> Publish Bundles"
@@ -33,5 +131,58 @@ run = [
   "npm run release",
   "mise run publish:components",
   "mise run build",
-  "mise run publish:bundles"
+  "mise run publish:bundles",
 ]
+
+# Template Instantiation Tasks
+[tasks.create]
+description = "Scaffold a new item (Interactive Selection)"
+run = "node {{ env.REPO_ROOT }}/scripts/create.js"
+
+[tasks."create:action"]
+description = "Scaffold a new Action"
+run = "node {{ env.REPO_ROOT }}/scripts/create-action.js"
+
+[tasks."create:mode"]
+description = "Scaffold a new Mode"
+run = "node {{ env.REPO_ROOT }}/scripts/create-mode.js"
+
+[tasks."create:org-role"]
+description = "Scaffold a new Org-Role"
+run = "node {{ env.REPO_ROOT }}/scripts/create-org-role.js"
+
+[tasks."create:role"]
+description = "Scaffold a new Role"
+run = "node {{ env.REPO_ROOT }}/scripts/create-role.js"
+
+[tasks."create:rule"]
+description = "Scaffold a new Rule"
+run = "node {{ env.REPO_ROOT }}/scripts/create-rule.js"
+
+[tasks."create:skill"]
+description = "Scaffold a new Skill"
+run = "node {{ env.REPO_ROOT }}/scripts/create-skill.js"
+
+[tasks."create:workflow"]
+description = "Scaffold a new Workflow"
+run = "node {{ env.REPO_ROOT }}/scripts/create-workflow.js"
+
+[tasks.build]
+description = "Build a component (Interactive or Context-Aware)"
+run = "node {{ env.REPO_ROOT }}/scripts/build.js"
+
+[tasks.info]
+description = "Show component metadata"
+run = "node {{ env.REPO_ROOT }}/scripts/info.js"
+
+[tasks.edit]
+description = "Edit component main file"
+run = "node {{ env.REPO_ROOT }}/scripts/edit.js"
+
+[tasks.validate]
+description = "Validate component structure and linting"
+run = "node {{ env.REPO_ROOT }}/scripts/validate.js"
+
+[tasks.rename]
+description = "Rename a component"
+run = "node {{ env.REPO_ROOT }}/scripts/rename.js"

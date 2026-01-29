@@ -1,52 +1,16 @@
-[tools]
-node = "lts"
-npm = "latest"
-"npm:@gnomatix/bundle-dipshit" = "latest"
+# PROJECT_WORKSPACE/mise.toml
 
-[env]
-# Detect the project root using git
-GNOMATIX_ROOT = "{{ exec(command='git rev-parse --show-toplevel') | trim }}"
-BUILD_VERSION = "{{ exec(command='git show HEAD:VERSION') | trim }}"
-GNOMATIX_RULES_PATH = "{{ exec(command='git rev-parse --show-toplevel') | trim }}/.agent/rules"
-GNOMATIX_SKILLS_PATH = "{{ exec(command='git rev-parse --show-toplevel') | trim }}/.agent/skills"
-GNOMATIX_WORKFLOWS_PATH = "{{ exec(command='git rev-parse --show-toplevel') | trim }}/.agent/workflows"
-## Examples: poopyhead -> cG9vcHloZWFk, dodobird -> ZG9kb2JpcmQ=, frack -> ZnJhY2s=
-SANITIZATION_RULES = "cG9vcHloZWFk:💩,ZG9kb2JpcmQ=:🦤,ZnJhY2s=:🤬"
+# Including this file as an example
+# of how to enable and configure
+# monorepo support
+experimental_monorepo_root = false
 
-[plugins]
-# Native npm backend used; no local plugin required.
+[settings]
+experimental = true
 
-[tasks.materialize]
-description = "Materialize rules, skills, and workflows from installed bundles into .agent/"
-run = "node scripts/materialize-bundles.js"
-
-[tasks.setup_plugin]
-description = "Register the local Gnomatix mise backend plugin"
-run = "mise plugin install gnomatix {{ exec(command='git rev-parse --show-toplevel') | trim }}/mise-plugin"
-
-[tasks.clean]
-description = "Remove all assembled bundles from build/"
-run = "Remove-Item -Path {{ exec(command='git rev-parse --show-toplevel') | trim }}/build/* -Recurse -Force"
-shell = "powershell"
-
-[tasks.build]
-description = "Assemble universal meta-package bundles"
-depends = ["clean"]
-run = "node {{ exec(command='git rev-parse --show-toplevel') | trim }}/scripts/build-bundles.js"
-
-[tasks."publish:components"]
-description = "Publish all atomic rules, skills, and workflows at current version"
-run = "npm publish --workspaces --if-present --registry https://gitea.gnomatix.com/api/packages/GNOMATIX/npm/"
-
-[tasks."publish:bundles"]
-description = "Publish universal meta-packages"
-run = "npm publish {{ exec(command='git rev-parse --show-toplevel') | trim }}/build/* --registry https://gitea.gnomatix.com/api/packages/GNOMATIX/npm/"
-
-[tasks.release]
-description = "Full release: Version -> Publish Components -> Build Meta-Packages -> Publish Bundles"
-run = [
-  "npm run release",
-  "mise run publish:components",
-  "mise run build",
-  "mise run publish:bundles"
+[monorepo]
+config_roots = [
+    "src/",
+#    "services/,*",          # Single-level glob pattern
+    "utils/",
 ]

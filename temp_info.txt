@@ -1,0 +1,4 @@
+[INFO] build/rule-socratic-method/assets/rules/socratic-method.md
+  Ver: 1.0.0
+  Seal: 賅臧窄坂舌皏夐岺矽渀
+  Hex: fb173e7b210942d03288f2c40ebaa7f6

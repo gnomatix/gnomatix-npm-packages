@@ -1,0 +1,13 @@
+{
+  "name": "@gnomatix/rule-socratic-method",
+  "version": "1.0.0",
+  "description": "GNOMATIX rule: socratic-method",
+  "publishConfig": {
+    "registry": "https://gitea.gnomatix.com/api/packages/GNOMATIX/npm/",
+    "access": "restricted"
+  },
+  "author": "Brett Whitty <support@gnomatix.com>",
+  "license": "BSL-1.1",
+  "os": [ "all" ],
+  "arch": [ "all" ]
+}

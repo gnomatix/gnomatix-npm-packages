@@ -16,6 +16,19 @@ Standards-compliant templates are maintained and validated under `src/_templates
   **Rules and Workflows Follow Template**: Project workspace templates define minimal standards for **rules**, **workflows**, **roles**, & **modes**.
 - **Validation**: Compliance is enforced by `tests/validate.js` and `markdownlint`. Skills files validation uses: `https://github.com/agentskills/agentskills/tree/main/skills-ref`
 
+- **Validation**: Compliance is enforced by `tests/validate.js` and `markdownlint`. Skills files validation uses: `https://github.com/agentskills/agentskills/tree/main/skills-ref`
+
+## Engineering Standards
+
+This project demands **High-Quality Production Code**. Theoretical functionality is insufficient; implementation must be robust, secure, and performant.
+
+### Critical Rules
+1.  **No Lazy Shell-Outs**: Do not use `execSync` or spawn shells for operations that can be performed natively by the runtime (e.g., file system traversal, environment variable access).
+2.  **Environment Authority**: Respect the managed environment (e.g., `mise`). If an environment variable (like `WORKSPACE_ROOT`) is provided, use it. Do not probe the system for values that are already asserted by the platform.
+3.  **Single Source of Truth**: Centralize shared logic. Do not duplicate critical paths or heuristics across multiple scripts.
+4.  **Security First**: Sanitize inputs and avoid patterns that introduce shell injection risks.
+5.  **Robustness**: Scripts must handle missing files, partial environments, and edge cases gracefully. They must fail safe and providing clear, actionable error messages.
+
 ## Development Workflow
 
 ### Git Flow & Branching
@@ -56,3 +69,9 @@ All commits MUST follow the [Conventional Commits](https://www.conventionalcommi
 ### Dipshit Protocol
 -   **Trigger**: Violation of core rules or explicit `/dipshit` command.
 -   **Effect**: Activates strict compliance checking and the Dipshit HUD.
+
+### Integrity Protocol
+-   **Authority**: User-modified files are immutable to the Agent.
+-   **Mechanism**: Before modifying any file in `.agent/` or `src/`, verify integrity using `scripts/markdown-integrity.js`.
+    -   **Result `[OK]`**: File is an unmodified release artifact. Agent **MAY** update or overwrite.
+    -   **Result `[CUSTOM]` or `[FAIL]`**: File has been modified by the User. Agent **MUST NOT** modify, overwrite, or revert. Report conflict to User.

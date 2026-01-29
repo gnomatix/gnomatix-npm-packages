@@ -1,0 +1,15 @@
+{
+  "name": "@gnomatix/bundle-socratic-method",
+  "version": "1.0.0",
+  "description": "Socratic methodbundle: Rules and workflows for agent self-correction.",
+  "dependencies": {
+    "@gnomatix/rule-socratic-method": "latest",
+    "@gnomatix/workflow-socratic-method": "latest"
+  },
+  "publishConfig": {
+    "registry": "https://gitea.gnomatix.com/api/packages/GNOMATIX/npm/",
+    "access": "restricted"
+  },
+  "author": "Brett Whitty <support@gnomatix.com>",
+  "license": "BSL-1.1"
+}
