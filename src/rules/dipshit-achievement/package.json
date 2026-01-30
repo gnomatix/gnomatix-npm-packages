@@ -1,6 +1,6 @@
 {
   "name": "@gnomatix/rule-dipshit-achievement",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "GNOMATIX rule: dipshit-achievement",
   "publishConfig": {
     "registry": "https://gitea.gnomatix.com/api/packages/GNOMATIX/npm/",

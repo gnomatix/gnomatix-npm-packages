@@ -1,6 +1,6 @@
 {
   "name": "@gnomatix/rule-socratic-method",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "GNOMATIX rule: socratic-method",
   "publishConfig": {
     "registry": "https://gitea.gnomatix.com/api/packages/GNOMATIX/npm/",
@@ -8,6 +8,10 @@
   },
   "author": "Brett Whitty <support@gnomatix.com>",
   "license": "BSL-1.1",
-  "os": [ "all" ],
-  "arch": [ "all" ]
+  "os": [
+    "all"
+  ],
+  "arch": [
+    "all"
+  ]
 }

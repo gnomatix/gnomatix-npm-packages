@@ -1,6 +1,6 @@
 {
   "name": "@gnomatix/rule-dipshit-hud",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Standardized HUD/Footer format for agent responses when in Dipshit Protocol.",
   "main": "RULE.md",
   "publishConfig": {

@@ -1,6 +1,6 @@
 {
   "name": "@gnomatix/bundle-dipshit",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Dipshit protocol bundle: Rules and workflows for agent self-correction.",
   "dependencies": {
     "@gnomatix/rule-dipshit-prevention": "latest",

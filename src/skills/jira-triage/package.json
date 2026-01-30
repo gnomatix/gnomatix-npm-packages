@@ -1,6 +1,6 @@
 {
   "name": "@gnomatix/skill-jira-triage",
-  "version": "1.3.3",
+  "version": "1.3.4",
   "description": "GNOMATIX skill: jira-triage",
   "publishConfig": {
     "registry": "https://gitea.gnomatix.com/api/packages/GNOMATIX/npm/",

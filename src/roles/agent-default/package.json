@@ -1,6 +1,6 @@
 {
   "name": "@gnomatix/role-agent-default",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "description": "Universal Gnomatix agent role",
   "publishConfig": {
     "registry": "https://gitea.gnomatix.com/api/packages/GNOMATIX/npm/",

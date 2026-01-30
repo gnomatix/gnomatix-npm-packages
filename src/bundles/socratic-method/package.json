@@ -1,6 +1,6 @@
 {
   "name": "@gnomatix/bundle-socratic-method",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Socratic methodbundle: Rules and workflows for agent self-correction.",
   "dependencies": {
     "@gnomatix/rule-socratic-method": "latest",

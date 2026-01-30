@@ -1,6 +1,6 @@
 {
   "name": "@gnomatix/workflow-dipshit",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Trigger a comprehensive self-audit of agent behavior against all active rules.",
   "publishConfig": {
     "registry": "https://gitea.gnomatix.com/api/packages/GNOMATIX/npm/",
